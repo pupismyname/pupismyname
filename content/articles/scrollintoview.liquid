@@ -1,0 +1,239 @@
+---
+title: Strange <code>scrollIntoView</code> behavior in Chrome
+---
+
+<style>
+
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  .carousel {
+    background: var(--c-bg-alt);
+    border: 1px solid var(--c-border);
+    padding: 1rem 2rem;
+  }
+
+  .carousel-items {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    overflow-y: auto;
+    overscroll-behavior-x: contain;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+  }
+
+  .carousel-item {
+    min-width: 100%;
+    scroll-snap-align: center;
+    background: var(--c-mix-80);
+    padding: 1rem 2rem;
+  }
+
+  .carousel-links {
+    list-style-type: none;
+    margin: 3rem 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .carousel-links li {
+    flex: 1 1 auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  .carousel-link {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    padding: 1rem 2rem;
+    background: var(--c-hover);
+    color: var(--c-bg);
+  }
+
+  .carousel-link:hover,
+  .carousel-link:focus {
+    background: var(--c-link);
+    color: var(--c-bg);
+    text-decoration: none;
+  }
+
+  .lorem-ipsum {
+    opacity: 0.25;
+  }
+
+</style>
+<h2>Set up the carousel</h2>
+<p>I am making a carousel using progressive enhancement principles. The HTML is simple. Each carousel slide has an <code>id</code>, and CSS is used to arrange the slides horizontally in a scrollable container. The browser knows how to scroll vertically and horizontally when you click an anchor link to view a specific slide, so you don't need to use Javascript to animate anything. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior">Smooth scrolling</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Scroll_Snap">snap scrolling</a> are controlled with CSS. The user can navigate through the slides by scrolling horizontally or by clicking the slide links above or below the carousel.</p>
+<p>
+  <pre>
+:root {
+scroll-behavior: smooth;
+}
+.carousel-items {
+display: flex;
+flex-wrap: nowrap;
+gap: 1rem;
+overflow-y: auto;
+overscroll-behavior-x: contain;
+scroll-behavior: smooth;
+scroll-snap-type: x mandatory;
+scroll-snap-stop: always;
+}
+.carousel-item {
+min-width: 100%;
+scroll-snap-align: center;
+padding: 1rem 2rem;
+}</pre>
+</p>
+<h2>Add functionality with Javascript</h2>
+<p>The Javascript layer adds additional functionality. It's mainly used control how far the page scrolls vertically before scrolling horizontally. The slide link's click event is intercepted and <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView">scrollIntoView</a></code> is used instead of the browser default functionality. <code>scrollIntoView</code> offers more control over scroll behavior than is possible with pure CSS. The default options are <code>{ block: 'start', inline: 'nearest' }</code>, which will scroll vertically until the element is at the top of the viewport, then scroll horizontally to the selected slide. Setting <code>block</code> to <code>nearest</code> will scroll vertically until the entire element is in the viewport, if it isn't already. This is the desired option for the carousel I'm creating. The other possible values are <code>center</code> and <code>end</code>.</p>
+<p>
+  <pre>
+el.scrollIntoView({ block: 'nearest', inline: 'nearest' });</pre>
+  </code>
+</p>
+<h2>The problem</h2>
+<p>This works great except for one issue in Chrome. If <code>:root</code> has <code>scroll-behavior: smooth;</code>, any clicks after the first one will no longer scroll the carousel horizontally. This means you can no longer change slides after the first click. This happens with or without <code>scrollIntoView</code>. Pure CSS scrolling has the same problem.</p>
+<p>But if you scroll the page up or down before clicking again, it will work as expected. It will also work as expected if <code>:root</code> has <code>scroll-behavior</code> set to anything other than <code>smooth</code>.</p>
+<p>This only happens in Chrome. Other browsers work as expected. Manually scrolling horizontally through the slides also works as expected.</p>
+<h2>A solution I don't like</h2>
+<p>One workaround is to temporarily disable smooth scrolling on <code>:root</code> (or never use it in the first place), but I prefer smooth scrolling and so does the client. This is not the solution I ended up using, but I figured I should mention it.</p>
+<p>
+  <pre>
+document.documentElement.style.scrollBehavior = 'auto';
+el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+document.documentElement.style.scrollBehavior = 'smooth';</pre>
+</p>
+<h2>A solution I like</h2>
+<p>The solution I went with is to use <code>scrollBy</code> to quickly scroll the window up and down by one pixel before attempting <code>scrollIntoView</code>. This happens fast enough to be invisible to the user, and it seems to jostle the viewport enough so that the horizontal scrolling works as expected.</p>
+<p>
+  <pre>
+window.scrollBy({ behavior: 'instant', top:  1, left: 0 });
+window.scrollBy({ behavior: 'instant', top: -1, left: 0 });
+el.scrollIntoView({ block: 'nearest', inline: 'nearest' });</pre>
+</p>
+<h2>Demo</h2>
+<p>Try it for yourself. If the carousel slides are completely inside the viewport and <code>block</code> mode is set to <code>nearest</code>, everything works great. If part of the slides are are off the bottom of the viewport when you click a link, that first click will be fine, but subsequent clicks won't move to the appropriate slide. If you turn on the "jostle" hack, things work great again.</p>
+
+<fieldset>
+  <legend><code>scrollIntoView</code> demo</legend>
+  <p>
+    <label for="block-mode"><code>block</code> mode</label>
+    <br>
+    <label for="block-mode-start"><input id="block-mode-start" name="block-mode" type="radio" value="start"> <code>start</code></label>
+    <br>
+    <label for="block-mode-center"><input id="block-mode-center" name="block-mode" type="radio" value="center"> <code>center</code></label>
+    <br>
+    <label for="block-mode-end"><input id="block-mode-end" name="block-mode" type="radio" value="end"> <code>end</code></label>
+    <br>
+    <label for="block-mode-nearest"><input id="block-mode-nearest" name="block-mode" type="radio" value="nearest" checked> <code>nearest</code></label>
+  </p>
+  <p><label for="root"><input id="root" type="checkbox"> Disable smooth scrolling on <code>:root</code></label></p>
+  <p><label for="jostle"><input id="jostle" type="checkbox"> Jostle the window before <code>scrollIntoView</code></label></p>
+</fieldset>
+
+<div class="carousel">
+  <p>Position the slides a little bit off the bottom of the viewport, then click these links to change slides.</p>
+  <ul class="carousel-links">
+    <li><a class="carousel-link" href="#carousel-first">First slide</a></li>
+    <li><a class="carousel-link" href="#carousel-second">Second slide</a></li>
+    <li><a class="carousel-link" href="#carousel-third">Third slide</a></li>
+    <li><a class="carousel-link" href="#carousel-fourth">Fourth slide</a></li>
+    <li><a class="carousel-link" href="#carousel-fifth">Fifth slide</a></li>
+  </ul>
+  <div class="carousel-items">
+    <div id="carousel-first" class="carousel-item">
+      <h3>First slide</h3>
+      <div class="lorem-ipsum">
+        <p>Cras molestie viverra lorem, non euismod ligula dignissim sit amet. Morbi est massa, pretium sed scelerisque sit amet, molestie finibus magna. Praesent ullamcorper felis in est ullamcorper, in luctus nisi ultricies. Fusce neque sapien, sollicitudin in lacinia eleifend, bibendum sollicitudin arcu. Curabitur elementum, nisl a molestie sodales, tortor massa rutrum sem, in maximus leo ligula sit amet felis. Phasellus sit amet condimentum leo. Sed lacinia, lorem eget porta mollis, nisi purus mollis lorem, ut consequat ipsum arcu quis tortor. In id dui vestibulum, sagittis orci a, feugiat sapien. Mauris ac nunc eget orci varius feugiat eget facilisis odio. Nullam ut diam et mi cursus lobortis eget in urna. Ut nec tincidunt ligula. Aliquam ornare, erat venenatis maximus malesuada, libero ipsum ullamcorper justo, a iaculis tortor massa ac justo. Curabitur ut posuere tortor, eu egestas mauris.</p>
+      </div>
+    </div>
+    <div id="carousel-second" class="carousel-item">
+      <h3>Second slide</h3>
+      <div class="lorem-ipsum">
+        <p>Etiam consectetur est a magna ultrices vestibulum. Aenean in semper felis. Maecenas nec orci vulputate, porttitor nibh ac, luctus turpis. In elementum vel enim at varius. Integer ac lacus ut massa dictum eleifend. Aenean commodo placerat mauris, blandit lobortis libero dictum at. Ut varius fringilla nisl sed malesuada. Maecenas blandit dapibus egestas.</p>
+      </div>
+    </div>
+    <div id="carousel-third" class="carousel-item">
+      <h3>Third slide</h3>
+      <div class="lorem-ipsum">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut mi vel ligula tincidunt porta sit amet ut lacus. Vestibulum eget rutrum nisl. Sed velit turpis, dignissim convallis gravida quis, placerat sollicitudin arcu. Nunc maximus sapien tincidunt orci porttitor, ac efficitur est pretium. Aenean sit amet risus justo. Vestibulum suscipit ac mi eget facilisis. Pellentesque eget magna eros. Phasellus aliquam, quam eu imperdiet mollis, justo leo mollis dui, vel posuere massa dui non diam.</p>
+      </div>
+    </div>
+    <div id="carousel-fourth" class="carousel-item">
+      <h3>Fourth slide</h3>
+      <div class="lorem-ipsum">
+        <p>Quisque dignissim facilisis mauris, non porta ligula vestibulum vitae. Vivamus maximus et mi et aliquet. In sit amet posuere nunc, sit amet cursus est. Nunc tempus, tellus sed lobortis pulvinar, lacus dui tincidunt nisl, et fringilla nulla justo vel elit. Suspendisse non risus sem. Curabitur sodales a mi sit amet condimentum. Vestibulum pharetra nunc at gravida scelerisque. Curabitur elementum ligula sed elit facilisis tempus id ut nisi. Nunc elit mauris, faucibus a porta quis, varius sit amet leo. Suspendisse potenti. Sed elit risus, mattis at tincidunt at, interdum tempus orci. Donec eget ex dolor. Sed elementum semper arcu ut aliquam. Morbi nibh neque, rhoncus vel dapibus ut, elementum sit amet sem. Sed iaculis leo eros, sit amet ullamcorper nulla varius eu.</p>
+      </div>
+    </div>
+    <div id="carousel-fifth" class="carousel-item">
+      <h3>Fifth slide</h3>
+      <div class="lorem-ipsum">
+        <p>Ut ut tristique metus. Duis faucibus nulla purus, sit amet facilisis turpis ultricies et. Nulla vehicula eros sed urna bibendum, nec aliquet nisi iaculis. Mauris sagittis molestie ante in interdum. Praesent lacinia neque lectus, ut vehicula felis euismod et. Nunc condimentum orci nec interdum pretium. Proin at tempus augue. Mauris congue et metus in consequat. Mauris massa dui, facilisis at imperdiet ac, cursus aliquam nunc. In condimentum nisi vel ligula aliquam, vitae fermentum nulla tempor. Nam dapibus orci sed metus posuere iaculis. Sed eget vestibulum ex, volutpat tempus massa.</p>
+      </div>
+    </div>
+  </div>
+  <ul class="carousel-links">
+    <li><a class="carousel-link" href="#carousel-first">First slide</a></li>
+    <li><a class="carousel-link" href="#carousel-second">Second slide</a></li>
+    <li><a class="carousel-link" href="#carousel-third">Third slide</a></li>
+    <li><a class="carousel-link" href="#carousel-fourth">Fourth slide</a></li>
+    <li><a class="carousel-link" href="#carousel-fifth">Fifth slide</a></li>
+  </ul>
+</div>
+
+<div class="lorem-ipsum">
+  <p>We need some content here to give the page more length.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum hendrerit erat viverra congue. Phasellus ac sapien tristique nunc ullamcorper tempus. Quisque facilisis nibh gravida arcu condimentum, id pharetra massa dignissim. Nunc non augue tellus. Nam volutpat fringilla finibus. Sed nec hendrerit elit. Pellentesque at molestie elit, id ornare ligula.</p>
+  <p>Nam mi elit, gravida in neque sed, aliquet feugiat sapien. Sed lobortis lorem augue, eu dignissim nulla vulputate quis. Nullam varius vehicula quam. In aliquam hendrerit nibh. Donec luctus vehicula odio eget ullamcorper. Praesent vel mi ut odio mattis cursus eu vitae urna. Pellentesque ac tincidunt purus, non varius tortor. Duis orci neque, dapibus ut fermentum in, hendrerit quis risus. Curabitur in tellus risus. Integer commodo purus consectetur, mollis tortor euismod, feugiat nisi. In massa tellus, feugiat ut posuere ac, congue in arcu. Cras pretium ipsum et purus sagittis ornare.</p>
+  <p>Morbi a mauris vestibulum purus consectetur accumsan. Nam posuere tincidunt molestie. Mauris auctor aliquam neque et tempor. Proin ornare venenatis dolor, in tempor nibh elementum sed. Sed laoreet, tellus sit amet accumsan tincidunt, sem enim varius quam, quis tristique lacus enim ut turpis. Donec sed leo in diam volutpat sodales. Cras vestibulum varius ipsum sed tempus. Nam non facilisis velit. Integer id nulla in odio viverra sodales. Phasellus non hendrerit lacus, sit amet ultricies augue. Phasellus sit amet mi in nulla molestie vulputate. Mauris sit amet consequat tellus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam consectetur hendrerit ligula at rhoncus. Integer porta risus et felis gravida, eget fringilla ante placerat.</p>
+  <p>Nullam tortor felis, fermentum eu velit vel, consequat dictum urna. Phasellus nec ultrices leo, gravida gravida tortor. Morbi tortor felis, luctus dignissim lacinia suscipit, faucibus in justo. Praesent blandit ut ex aliquam fermentum. Proin pulvinar urna non tempor sodales. Cras metus urna, bibendum et viverra sit amet, dapibus eget lectus. Phasellus quis magna sagittis, fringilla purus vel, rhoncus nibh.</p>
+  <p>Nullam vitae tortor id augue tincidunt varius. Cras id eros vel magna vehicula venenatis. Mauris malesuada tristique ipsum, in molestie neque pretium condimentum. Duis sed dolor facilisis, sodales sem a, auctor lacus. Nam gravida mattis augue consequat vehicula. Sed sit amet sagittis nulla, lacinia pharetra dui. Ut elementum sapien vel lorem varius tempor. Donec efficitur pulvinar tellus, non sollicitudin turpis semper et. Fusce aliquam varius mauris egestas interdum. Aenean at enim arcu. Nullam lacinia felis odio, nec rhoncus ligula feugiat ac.</p>
+</div>
+
+<script>
+  (function () {
+
+    const carousels = document.querySelectorAll('.carousel');
+
+    if (carousels.length === 0) return;
+
+    const scrollToItem = function (hash) {
+      if (!hash) return;
+      const activeSlide = document.querySelector(hash);
+      if (!activeSlide) return;
+      if (document.getElementById('root').checked) {
+        document.documentElement.style.scrollBehavior = 'auto';
+      }
+      if (activeSlide.classList.contains('carousel-item')) {
+        if (document.getElementById('jostle').checked) {
+          window.scrollBy({ behavior: 'instant', top:  1, left: 0 });
+          window.scrollBy({ behavior: 'instant', top: -1, left: 0 });
+        }
+        const blockMode = document.querySelector('input[name="block-mode"]:checked').value;
+        activeSlide.scrollIntoView({
+          block: blockMode,
+          inline: 'nearest',
+        });
+      }
+      document.documentElement.style.scrollBehavior = 'smooth';
+    };
+
+    for (const carousel of carousels) {
+      carousel.classList.add('carousel-initialized');
+      const jumpLinks = carousel.querySelectorAll('.carousel-link');
+      for (const jumpLink of jumpLinks) {
+        jumpLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          scrollToItem(e.target.getAttribute('href'));
+        });
+      };
+    };
+
+  }());
+</script>

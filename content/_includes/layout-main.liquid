@@ -1,0 +1,72 @@
+---
+title: John Brooks
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="{{ eleventy.generator }}">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/styles/styles.css?v=1">
+</head>
+<body>
+
+  <div class="container">
+    <nav class="masthead-nav">
+      <h1><a href="/">John Brooks</a></h1>
+      {{ collections.all | eleventyNavigation | eleventyNavigationToHtml }}
+    </nav>
+    <div class="columns">
+      <nav class="column column-sidebar">
+        <div class="section">
+          <h2>About</h2>
+          <p>My name is <strong>John Brooks</strong>, sometimes known as <strong>pupismyname</strong> or <strong>pup</strong>. I live in <strong>Omaha, Nebraska</strong>, USA. I'm a front-end web developer, specializing in User Experience, HTML, CSS, and Javascript.</p>
+        </div>
+        <div class="section">
+          <h2>Work</h2>
+          <ul class="listing">
+            <li><a href="https://www.ookla.com/">Ookla</a></li>
+            <li><a href="https://www.speedtest.net/">Speedtest</a></li>
+            <li><a href="https://www.georgiagoldenolympics.org/">Georgia Golden Olympics</a></li>
+            <li><a href="https://www.linomafc.com/">Linoma FC</a></li>
+            <li><a href="https://www.weshouldhavewebsite.com/">We Should Have Website</a></li>
+          </ul>
+        </div>
+        <div class="section">
+          <h2>Contact</h2>
+          <ul class="listing">
+            <li><a href="mailto:contact@pupismyname.com">Email</a></li>
+            <li><a href="https://codepen.io/pupismyname/">CodePen</a></li>
+            <li><a href="https://github.com/pupismyname">Github</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="column column-content">
+        <main>
+          {{ content }}
+        </main>
+        <hr>
+        <footer>
+          <nav class="footer-nav">
+            {{ collections.all | eleventyNavigation | eleventyNavigationToHtml }}
+          </nav>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var top = document.querySelectorAll("[href='#top']");
+      for (var i = 0; i < top.length; i++) {
+        top[i].addEventListener('click', function (e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>

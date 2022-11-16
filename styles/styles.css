@@ -1,0 +1,259 @@
+:root {
+  --c-dark: #011627;
+  --c-mix-0: #011627;
+  --c-mix-5: #0e2232;
+  --c-mix-10: #1a2d3c;
+  --c-mix-15: #273947;
+  --c-mix-20: #334552;
+  --c-mix-25: #40505c;
+  --c-mix-30: #4d5c67;
+  --c-mix-35: #596872;
+  --c-mix-40: #66737c;
+  --c-mix-45: #727f87;
+  --c-mix-50: #7f8b92;
+  --c-mix-55: #8c969c;
+  --c-mix-60: #98a2a7;
+  --c-mix-65: #a5adb1;
+  --c-mix-70: #b1b9bc;
+  --c-mix-75: #bec5c7;
+  --c-mix-80: #cbd0d1;
+  --c-mix-85: #d7dcdc;
+  --c-mix-90: #e4e8e7;
+  --c-mix-95: #f0f3f1;
+  --c-mix-100: #fdfffc;
+  --c-light: #fdfffc;
+  --c-text: var(--c-mix-0);
+  --c-text-alt: var(--c-mix-20);
+  --c-text-alt-2: var(--c-mix-60);
+  --c-bg: var(--c-mix-100);
+  --c-bg-alt: var(--c-mix-95);
+  --c-bg-alt-2: var(--c-mix-90);
+  --c-border: var(--c-mix-80);
+  --c-link: #ff0022;
+  --c-hover: #800011;
+  font-size: 12px;
+  overflow-y: scroll;
+}
+
+/*
+  Copyright (c) 2015, Impallari Type (www.impallari.com)
+  Public Sans is licensed under the SIL Open Font License v1.1
+  (https://opensource.org/licenses/OFL-1.1)
+  https://public-sans.digital.gov/
+*/
+
+@font-face {
+  font-family: 'PublicSans';
+  src: url('/assets/PublicSans-Roman-VF.ttf');
+  font-display: swap;
+}
+
+* {
+  box-sizing: inherit;
+  text-size-adjust: none;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: PublicSans, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  font-variation-settings: 'wght' 60;
+  font-size: clamp(10px, 1.1vw, 100px);
+  line-height: 1.6;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: var(--c-link);
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  color: var(--c-hover);
+}
+
+:where(.column-sidebar) h1,
+:where(.column-sidebar) h2,
+:where(.column-sidebar) p,
+:where(.column-sidebar) ul {
+  margin: 0.5em 0;
+}
+
+h1, h2 {
+  font-weight: 300;
+}
+
+h1:first-child {
+  font-size: 2.2em;
+}
+
+h2 {
+  font-size: 1.4em;
+}
+
+strong {
+  font-weight: 500;
+  font-variation-settings: 'wght' 100;
+}
+
+code {
+  color: var(--c-text-alt);
+  background: var(--c-bg-alt);
+}
+
+pre {
+  font-size: smaller;
+  background: var(--c-bg-alt);
+  border: 1px solid var(--c-border);
+  color: var(--c-text-alt);
+  padding: 1em;
+  overflow: auto;
+}
+
+fieldset {
+  border: 1px solid var(--c-border);
+  margin: 2em 0;
+  padding: 1em 2em;
+  background: var(--c-bg-alt-2);
+}
+
+legend {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  min-height: 20em;
+}
+
+:where(main) h1:first-child {
+  margin-top: 0;
+}
+
+hr {
+  background: var(--c-border);
+  height: 1px;
+  border: none;
+  padding: 0;
+}
+
+.container {
+  padding: 1em;
+  max-width: 100em;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 40em) {
+  .container {
+    padding: 1em 2em 2em;
+  }
+}
+
+@media screen and (min-width: 40em) {
+  .columns {
+    display: grid;
+    grid-template-columns: calc(31% - 2em) calc(69% - 2em);
+    gap: 4em;
+  }
+}
+
+.column-sidebar {
+  border-bottom: 1px solid var(--c-border);
+}
+
+@media screen and (min-width: 40em) {
+  .column-sidebar {
+    border-bottom: none;
+  }
+}
+
+.column-content {
+}
+
+.section {
+  margin-bottom: 2em;
+}
+
+.listing {
+  padding: 0;
+}
+
+:where(.listing) li {
+  display: inline-block;
+  list-style-type: none;
+  margin-right: 1em;
+}
+
+:where(.listing) li:last-child {
+  margin-right: 0;
+}
+
+.subdued {
+  opacity: 0.5;
+}
+
+.small {
+  font-size: smaller;
+}
+
+.codepen {
+  /* from codepen embed */
+  box-sizing: border-box; display: flex; align-items: center;
+  justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;
+}
+
+.masthead-nav {
+  display: flex;
+  gap: 2em;
+  align-items: baseline;
+}
+
+:where(.masthead-nav) ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1em;
+}
+
+.next-prev {
+  display: flex;
+  margin: 1em 0;
+  padding: 0;
+  list-style-type: none;
+  gap: 1em;
+  justify-content: space-between;
+}
+
+:where(.footer-nav) ul {
+  list-style-type: none;
+  margin: 1em 0;
+  padding: 0;
+  display: flex;
+  gap: 1em;
+}
+
+.codepen-embed {
+  margin: 2em 0;
+}
+
+.content-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.content-list-item {
+  margin: 2em 0;
+}
+
+:where(.content-list-item) h3 {
+  margin: 0;
+}

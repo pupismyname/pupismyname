@@ -1,0 +1,12 @@
+---
+layout: layout-main.liquid
+excludeFromCollections: true
+title: Articles
+eleventyNavigation:
+  key: Articles
+  order: 1
+---
+<h1>Articles</h1>
+<hr>
+{%- assign list = collections.articles | reverse -%}
+{%- include "list-all", list: list, listTags: false -%}

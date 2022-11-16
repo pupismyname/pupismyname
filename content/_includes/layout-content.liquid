@@ -1,0 +1,11 @@
+---
+layout: layout-main.liquid
+title: Content
+---
+<h1>{{title}}</h1>
+<p class="subdued small">{{page.date | readableDateTime}}</p>
+<hr>
+<div class="content">
+  {{ content }}
+</div>
+{%- include "next-prev.liquid", coll: collections[collection], currentPage: page -%}

@@ -1,0 +1,23 @@
+{%- if list == blank -%}
+  {%- assign list = collections.content | reverse | slice: 0, 20 -%}
+{%- endif -%}
+{%- if listTags == blank -%}
+  {%- assign listTags = true -%}
+{%- endif -%}
+<ul class="content-list">
+  {%- for item in list -%}
+    <li class="content-list-item">
+      <h3><a href="{{ item.url }}">{{ item.data.title }}</a></h3>
+      <div class="subdued small">{{item.date | readableDateTime}}</div>
+      {%- if listTags -%}
+        <div class="subdued small">
+          {%- for tag in item.data.tags %}
+            {%- unless tag == 'content' %}
+              <a href="/{{tag}}/">{{tag}}</a>
+            {%- endunless %}
+          {%- endfor %}
+        </div>
+      {%- endif %}
+    </li>
+  {%- endfor %}
+</ul>

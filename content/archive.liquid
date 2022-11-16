@@ -1,0 +1,9 @@
+---
+layout: layout-main.liquid
+excludeFromCollections: true
+title: Archive
+---
+<h1>Archive</h1>
+<hr>
+{%- assign list = collections.content | reverse -%}
+{%- include "list-all", list: list -%}
