@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx @11ty/eleventy",
+    "build": "npm run clean; npx @11ty/eleventy",
     "clean": "rm -r _site",
-    "dev": "npx @11ty/eleventy --serve --quiet --incremental",
+    "dev": "npm run clean; npx @11ty/eleventy --serve --quiet --incremental",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
