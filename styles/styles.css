@@ -61,13 +61,16 @@ body {
   color: var(--c-text);
   font-family: PublicSans, sans-serif;
   font-weight: 300;
-  font-size: 12px;
   font-variation-settings: 'wght' 60;
-  font-size: clamp(10px, 1.1vw, 100px);
+  font-size: 9px;
+  font-size: 2.8vw;
   line-height: 1.6;
   padding: 0;
   margin: 0;
 }
+
+@media screen and (min-width: 40em) { body { font-size: 1.1vw; } }
+@media screen and (min-width: 136em) { body { font-size: 24px; } }
 
 a {
   color: var(--c-link);
@@ -143,7 +146,7 @@ hr {
 
 .container {
   padding: 1em;
-  max-width: 100em;
+  max-width: 91em;
   margin: 0 auto;
 }
 
