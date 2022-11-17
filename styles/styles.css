@@ -31,7 +31,6 @@
   --c-border: var(--c-mix-80);
   --c-link: #ff0022;
   --c-hover: #800011;
-  font-size: 12px;
   overflow-y: scroll;
 }
 
@@ -44,7 +43,7 @@
 
 @font-face {
   font-family: 'PublicSans';
-  src: url('/assets/PublicSans-Roman-VF.ttf');
+  src: url('/s/fonts/PublicSans-Roman-VF.ttf');
   font-display: swap;
 }
 
@@ -90,13 +89,9 @@ h1, h2 {
   font-weight: 300;
 }
 
-h1:first-child {
-  font-size: 2.2em;
-}
-
-h2 {
-  font-size: 1.4em;
-}
+h1 { font-size: 2.2em; }
+h2 { font-size: 1.4em; }
+h3 { font-size: 1.2em; }
 
 strong {
   font-weight: 500;
@@ -133,8 +128,10 @@ main {
   min-height: 20em;
 }
 
-:where(main) h1:first-child {
-  margin-top: 0;
+@media screen and (min-width: 40em) {
+  :where(main) h1:first-child {
+    margin-top: 0;
+  }
 }
 
 hr {
@@ -256,4 +253,24 @@ hr {
 
 :where(.content-list-item) h3 {
   margin: 0;
+}
+
+.logo {
+  display: inline-block;
+  position: relative;
+  top: calc(1em / 3);
+  border-radius: 100%;
+  font-size: calc(1em / 3);
+  width: 3em;
+  height: 3em;
+  line-height: 3em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  background: var(--c-link);
+  color: var(--c-bg);
+}
+
+:where(a:hover, a:focus, a:active) .logo {
+  background: var(--c-hover);
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run clean; npx @11ty/eleventy",
     "clean": "rimraf _site",
-    "dev": "npm run clean; npx @11ty/eleventy --serve --quiet --incremental",
+    "dev": "npm run clean; npx @11ty/eleventy --serve --incremental --quiet",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,7 +15,9 @@
     "@11ty/eleventy": "^1.0.2",
     "@11ty/eleventy-navigation": "^0.3.5",
     "@11ty/eleventy-plugin-rss": "^1.2.0",
+    "cssnano": "^5.1.14",
     "luxon": "^2.5.0",
+    "postcss": "^8.4.19",
     "rimraf": "^2.7.1"
   }
 }
