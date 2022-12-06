@@ -19,6 +19,11 @@ module.exports = ((eleventyConfig) => {
   eleventyConfig.addPassthroughCopy({ 'styles': '/s/styles' });
   eleventyConfig.addPassthroughCopy({ 'assets': '/s' });
 
+  eleventyConfig.addFilter('metadataDateTime', (dateObj) => {
+    const dt = DateTime.fromJSDate(dateObj, { zone: 'America/Chicago' }).setZone('utc');
+    return dt.toFormat('yyyy-LL-dd HH:mm:ss');
+  });
+
   eleventyConfig.addFilter('readableDateTime', (dateObj) => {
     const dt = DateTime.fromJSDate(dateObj, { zone: 'utc' }).setZone('America/Chicago');
     return dt.setLocale('en').toLocaleString(DateTime.DATETIME_FULL);

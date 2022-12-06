@@ -4,6 +4,13 @@ title: Content
 ---
 <h1>{{title}}</h1>
 <p class="subdued small">{{page.date | readableDateTime}}</p>
+{%- unless date -%}
+  <p>
+    <b>! ! ! ! ! !</b> Don't forget your metadata date <b>! ! ! ! ! !</b><br><br>
+    <b>date: {{page.date | metadataDateTime}}</b><br><br>
+    <b>! ! ! ! ! !</b> Don't forget your metadata date <b>! ! ! ! ! !</b>
+  </p>
+{%- endunless -%}
 <hr>
 <div class="content">
   {{ content }}

@@ -126,8 +126,13 @@ legend {
   margin: 0;
 }
 
-main {
+main,
+.content {
   min-height: 20em;
+}
+
+.content {
+  margin-bottom: 4em;
 }
 
 @media screen and (min-width: 40em) {
@@ -222,13 +227,15 @@ hr {
   gap: 1em;
 }
 
-.next-prev {
-  display: flex;
-  margin: 1em 0;
-  padding: 0;
-  list-style-type: none;
-  gap: 1em;
-  justify-content: space-between;
+@media screen and (min-width: 40em) {
+  .next-prev {
+    display: flex;
+    margin: 1em 0;
+    padding: 0;
+    list-style-type: none;
+    gap: 1em;
+    justify-content: space-between;
+  }
 }
 
 :where(.footer-nav) ul {
