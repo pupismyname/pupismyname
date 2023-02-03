@@ -21,11 +21,14 @@ title: John Brooks
 
   <div class="container">
     <nav class="masthead-nav">
-      <h1><a href="/"><span class="logo"></span> &nbsp; John Brooks</a></h1>
+      <h1><a href="/"><span class="logo">//---</span> John Brooks</a></h1>
       {{ collections.all | eleventyNavigation | eleventyNavigationToHtml }}
     </nav>
     <div class="columns">
       <nav class="column column-sidebar">
+        <div class="section">
+          <p><a href="#" data-js="font-switcher"><span class="button">Aa</span> Change fonts</a></p>
+        </div>
         <div class="section">
           <h2>About</h2>
           <p>My name is <strong>John Brooks</strong>, sometimes known as <strong>pupismyname</strong> or <strong>pup</strong>. I live in <strong>Omaha, Nebraska</strong>, USA. I'm a front-end web developer, specializing in User Experience, HTML, CSS, and Javascript.</p>
@@ -63,17 +66,8 @@ title: John Brooks
     </div>
   </div>
 
-  <script>
-    (function () {
-      var top = document.querySelectorAll("[href='#top']");
-      for (var i = 0; i < top.length; i++) {
-        top[i].addEventListener('click', function (e) {
-          e.preventDefault();
-          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-        });
-      }
-    })();
-  </script>
+  {% include "js-scroll-to-top" %}
+  {% include "js-font-switcher" %}
 
 </body>
 </html>

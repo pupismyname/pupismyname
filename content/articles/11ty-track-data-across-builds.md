@@ -3,7 +3,7 @@ title: Track data across builds in 11ty
 date: 2022-12-06 19:38:45
 ---
 
-When developing an 11ty site using `--serve`, you might have the need to track some data across rebuilds. In my case, I wanted a way count the number of builds in the current session, and I needed to set some flags so I didn't create duplicate watch processes.
+When developing an [11ty](https://www.11ty.dev/) site using `--serve`, you might have the need to track some data across rebuilds. In my case, I wanted a way count the number of builds in the current session, and I needed to set some flags so I didn't create duplicate watch processes.
 
 11ty runs all `addGlobalData` functions on every build and rebuild. Knowing this, we can create a variable outside of `addGlobalData` to track any data we want. Inside `addGlobalData` we can clone the variable, modify the original as needed, then return the clone. Since we are modifying the original variable after cloning, any modifications will be picked up on the next rebuild.
 
