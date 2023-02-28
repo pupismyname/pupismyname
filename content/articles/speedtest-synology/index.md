@@ -157,14 +157,6 @@ Click `OK`, accept the warning about running a task as `root`, and wait for the 
 
 Be aware that a Speedtest can use a few hundred megabytes of bandwidth. If you have a metered connection you might want to reconsider how often you run this task.
 
-## Commit changes to the Docker image
-
-## Delete speedtest-cli container
-
-## Delete alpine image
-
-## Recreate speedtest-cli container
-
 ## Conclusion
 
-Now that this is set up, what should you do with all these JSON files? I don't know! I guess that will be the topic of a new article.
+Now that this is set up, what should you do with all these JSON files? I don't know! Maybe make a chart or something. I guess that will be the topic of a new article.
