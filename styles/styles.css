@@ -12,14 +12,14 @@ fonts
 @font-face {
   font-family: 'PublicSans';
   src: url('/s/fonts/PublicSans[wght].woff2');
-  font-display: swap;
+  font-display: auto;
   font-weight: 100 900;
 }
 
 @font-face {
   font-family: 'Hourglass';
   src: url('/s/fonts/Hourglass Bold.woff2');
-  font-display: swap;
+  font-display: auto;
   font-style: normal;
   font-weight: 700;
 }
@@ -27,7 +27,7 @@ fonts
 /* @font-face {
   font-family: 'Hourglass';
   src: url('/s/fonts/Hourglass Italic.woff2');
-  font-display: swap;
+  font-display: auto;
   font-style: italic;
   font-weight: 400;
 } */
@@ -35,7 +35,7 @@ fonts
 @font-face {
   font-family: 'Hourglass';
   src: url('/s/fonts/Hourglass.woff2');
-  font-display: swap;
+  font-display: auto;
   font-style: normal,;
   font-weight: 400;
 }

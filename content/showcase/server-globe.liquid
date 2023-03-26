@@ -1,0 +1,58 @@
+---
+title: Speedtest Servers
+date: 2023-03-25 22:56:24
+---
+
+<script src="/s/js/third-party/globe/three.min.js"></script>
+<script src="/s/js/third-party/globe/Detector.js"></script>
+<script src="/s/js/third-party/globe/Tween.js"></script>
+<script src="/s/js/third-party/globe/globe.js"></script>
+
+<style>
+  #globe {
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+</style>
+
+<p>Speedtest servers and their locations. The taller the line, the more servers in that location.</p>
+
+<div id="globe"></div>
+
+<p>Made with <a href="https://experiments.withgoogle.com/chrome/globe">The WebGL Globe</a>, <a href="https://threejs.org/">threejs</a>, and data from <a href="https://www.speedtest.net/">Speedtest.net</a>. Data retrieved March 25, 2023.</p>
+
+<script>
+
+  (async () => {
+    if (!Detector.webgl){
+      Detector.addGetWebGLMessage();
+    } else {
+      const container = document.getElementById('globe');
+      const globe = new DAT.Globe(container, {
+        imgDir: '/s/img/third-party/globe/',
+        animated: true,
+      });
+      try {
+        const url = '/s/js/servers-2023-03-25.json';
+        const response = await fetch(url);
+        const json = await response.json();
+        const mostServers = Math.max.apply(Math, json.servers.map((server) => server.server_count));
+        const series = [];
+        json.servers.map((server) => {
+          series.push(server.lat);
+          series.push(server.lon);
+          series.push(server.server_count / mostServers);
+        });
+        const data = [ [ 'servers', series ] ];
+        for (let i = 0; i < data.length; i++) {
+          globe.addData(data[i][1], { format: 'magnitude', name: data[i][0] });
+        }
+        globe.createPoints();
+        globe.animate();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  })();
+
+</script>
