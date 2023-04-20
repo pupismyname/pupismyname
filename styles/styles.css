@@ -16,36 +16,17 @@ fonts
   font-weight: 100 900;
 }
 
-@font-face {
-  font-family: 'Hourglass';
-  src: url('/s/fonts/Hourglass Bold.woff2');
-  font-display: auto;
-  font-style: normal;
-  font-weight: 700;
-}
-
-/* @font-face {
-  font-family: 'Hourglass';
-  src: url('/s/fonts/Hourglass Italic.woff2');
-  font-display: auto;
-  font-style: italic;
-  font-weight: 400;
-} */
-
-@font-face {
-  font-family: 'Hourglass';
-  src: url('/s/fonts/Hourglass.woff2');
-  font-display: auto;
-  font-style: normal,;
-  font-weight: 400;
-}
-
 /* ---
 variables
 --- */
 
 :root {
+  /* colors */
+  --c-light: #fdfffc;
   --c-dark: #011627;
+  --c-primary: #ff4059;
+  --c-primary-alt: #ff8091;
+  /* mix light and dark */
   --c-mix-0: #011627;
   --c-mix-5: #0e2232;
   --c-mix-10: #1a2d3c;
@@ -67,7 +48,7 @@ variables
   --c-mix-90: #e4e8e7;
   --c-mix-95: #f0f3f1;
   --c-mix-100: #fdfffc;
-  --c-light: #fdfffc;
+
   --c-text: var(--c-mix-100);
   --c-text-alt: var(--c-mix-80);
   --c-text-alt-2: var(--c-mix-40);
@@ -75,51 +56,24 @@ variables
   --c-bg-alt: var(--c-mix-5);
   --c-bg-alt-2: var(--c-mix-10);
   --c-border: var(--c-mix-20);
-  --c-primary-light-3: #400009;
-  --c-primary-light-2: #800011;
-  --c-primary-light: #bf001a;
-  --c-primary: #ff0022;
-  --c-primary-dark: #ff4059;
-  --c-primary-dark-2: #ff8091;
-  --c-primary-dark-3: #ffbfc8;
   --c-link: var(--c-primary);
-  --c-hover: var(--c-primary-dark);
-  --f-body: Hourglass, sans-serif;
-  --f-header: Hourglass, sans-serif;
-  --f-code: Hourglass, monospace;
-  --f-size: 8px;
-  --f-size-big: 2em;
-  --f-size-code: 1em;
-  --v-border: 0.125em;
-  --v-border-2: 0.25em;
-  --border: var(--v-border) solid var(--c-border);
-  --p-corners: polygon(
-    0 var(--v-border-2), var(--v-border) var(--v-border-2), var(--v-border) var(--v-border), var(--v-border-2) var(--v-border), var(--v-border-2) 0,
-    calc(100% - var(--v-border-2)) 0, calc(100% - var(--v-border-2)) var(--v-border),
-    calc(100% - var(--v-border)) var(--v-border), calc(100% - var(--v-border)) var(--v-border-2),
-    100% var(--v-border-2), 100% calc(100% - var(--v-border-2)),
-    calc(100% - var(--v-border)) calc(100% - var(--v-border-2)),
-    calc(100% - var(--v-border)) calc(100% - var(--v-border)),
-    calc(100% - var(--v-border-2)) calc(100% - var(--v-border)),
-    calc(100% - var(--v-border-2)) 100%, var(--v-border-2) 100%,
-    var(--v-border-2) calc(100% - var(--v-border)), var(--v-border) calc(100% - var(--v-border)),
-    var(--v-border) calc(100% - var(--v-border-2)), 0 calc(100% - var(--v-border-2))
-  ); /* pixelated corners from https://pixelcorners.lukeb.co.uk/ */
-}
-
-@media screen and (min-width: 70em) {
-  :root {
-    --f-size: 10px;
-  }
-}
-
-:where(:root).fonts-normal {
-  --f-size: clamp(9px, 2.6vw, 17.5px);
+  --c-hover: var(--c-primary-alt);
   --f-body: PublicSans, sans-serif;
   --f-header: PublicSans, sans-serif;
   --f-code: monospace;
+  /* --f-size: clamp(9px, 1.8vw, 18px); */
+  --f-size: max(2.4vw, 9px);
+  --f-size-big: 2em;
+  --f-size-code: 1em;
   --v-border: 1px;
   --v-border-2: 1px;
+  --border: var(--v-border) solid var(--c-border);
+}
+
+@media screen and (min-width: 50em) {
+  :root {
+    --f-size: min(1.11vw, 18px);
+  }
 }
 
 html {
@@ -127,32 +81,14 @@ html {
 }
 
 body {
-  /* -webkit-font-smoothing: none; */
-  /* font-smoothing: none; */
   font-family: var(--f-body);
   font-size: var(--f-size);
-  letter-spacing: calc(var(--v-border) * -1);
-  line-height: 2;
+  letter-spacing: normal;
+  line-height: 1.6;
   background: var(--c-bg);
   color: var(--c-text);
   padding: 0;
   margin: 0;
-}
-
-:where(:root.fonts-normal) body {
-  /* -webkit-font-smoothing: auto; */
-  /* font-smoothing: auto; */
-  font-size: var(--f-size);
-  line-height: 1.6;
-  letter-spacing: normal;
-  font-weight: 400;
-  zoom: 1;
-}
-
-@media screen and (min-width: 70em) {
-  :root.fonts-normal {
-    --f-size: clamp(9px, 1.1vw, 17.5px);
-  }
 }
 
 body {
@@ -176,47 +112,30 @@ a:hover, a:active {
   color: var(--c-hover);
 }
 
-:where(.column-sidebar) h1,
-:where(.column-sidebar) h2,
-:where(.column-sidebar) p,
-:where(.column-sidebar) ul {
+:where(.grid-sidebar) .section {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 50em) {
+  :where(.grid-sidebar) .section {
+    width: 100%;
+  }
+}
+
+:where(.grid-sidebar) :is(h1, h2, p, ul) {
   margin: 0.5em 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-size: var(--f-size);
-  font-weight: 400;
   font-family: var(--f-header);
   line-height: 1.6;
-}
-
-h1, h2 {
-  font-size: var(--f-size-big);
-  letter-spacing: calc(var(--v-border) * -1);
-}
-
-:where(:root.fonts-normal) :is(h1, h2) {
-  letter-spacing: normal;
-}
-
-h1, h3, strong, b {
-  font-weight: 700;
-  letter-spacing: 0;
-}
-
-:where(:root.fonts-normal) :is(strong, b) {
-  letter-spacing: normal;
-  font-weight: 700;
-}
-
-:where(:root.fonts-normal) :is(h1, h2, h3, h4, h5, h6) {
-  font-size: initial;
   font-weight: 200;
 }
 
-:where(:root.fonts-normal) h1 { font-size: 2.2em; }
-:where(:root.fonts-normal) h2 { font-size: 1.4em; }
-:where(:root.fonts-normal) h3 { font-size: 1.2em; }
+h1 { font-size: 2.2em; }
+h2 { font-size: 1.4em; }
+h3 { font-size: 1.2em; }
 
 code {
   display: inline-block;
@@ -257,16 +176,6 @@ main,
   min-height: 20em;
 }
 
-main {
-  padding-top: 3em;
-}
-
-@media screen and (min-width: 70em) {
-  main {
-    padding-top: 0;
-  }
-}
-
 .content {
   margin-bottom: 4em;
 }
@@ -279,7 +188,7 @@ main {
   padding-bottom: 1em;
 }
 
-@media screen and (min-width: 70em) {
+@media screen and (min-width: 50em) {
   :where(main) h1:first-child {
     margin-top: 0;
   }
@@ -294,50 +203,53 @@ hr {
 
 .container {
   padding: 1em;
-  max-width: 1300px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
-:where(:root.fonts-normal) .container {
-  max-width: 1600px;
-}
-
-@media screen and (min-width: 70em) {
+@media screen and (min-width: 50em) {
   .container {
     padding: 1em 2em 2em;
   }
 }
 
-.column,
-.masthead-nav {
-  max-width: 640px;
-  margin: 0 auto;
+.grid {
+  --gap: 4em;
+  display: grid;
+  gap: 0 var(--gap);
+  grid-template-columns: 100%;
+  grid-template-areas:
+    "grid-masthead"
+    "grid-main"
+    "grid-sidebar"
+    "grid-footer";
 }
 
-@media screen and (min-width: 70em) {
-  .column,
-  .masthead-nav {
-    max-width: 100%;
-    margin: 0;
-  }
-}
-
-@media screen and (min-width: 70em) {
-  .columns {
-    --gap: 4em;
-    display: grid;
+@media screen and (min-width: 50em) {
+  .grid {
     grid-template-columns: calc(31% - (var(--gap) / 2)) calc(69% - (var(--gap) / 2));
-    gap: var(--gap);
+    grid-template-areas:
+      "grid-masthead grid-masthead"
+      "grid-sidebar  grid-main"
+      ".             grid-footer";
   }
 }
 
-.column-sidebar {
-  border-bottom: var(--border);
+.grid-masthead { grid-area: grid-masthead; }
+.grid-sidebar { grid-area: grid-sidebar; }
+.grid-main { grid-area: grid-main; }
+.grid-footer { grid-area: grid-footer; }
+
+:where(.grid-footer, .grid-masthead) > hr {
+  display: none;
 }
 
-@media screen and (min-width: 70em) {
-  .column-sidebar {
-    border-bottom: none;
+@media screen and (min-width: 50em) {
+  :where(.grid-footer) > hr {
+    display: block;
+  }
+  :where(.grid-sidebar) > hr {
+    display: none;
   }
 }
 
@@ -345,14 +257,8 @@ hr {
   margin-bottom: 2em;
 }
 
-@media screen and (min-width: 70em) {
+@media screen and (min-width: 50em) {
   .section {
-    margin-bottom: 4em;
-  }
-}
-
-@media screen and (min-width: 70em) {
-  :where(:root.fonts-normal) .section {
     margin-bottom: 2em;
   }
 }
@@ -376,10 +282,6 @@ hr {
 }
 
 .small {
-  font-size: var(--f-size);
-}
-
-:where(:root.fonts-normal) .small {
   font-size: smaller;
 }
 
@@ -389,24 +291,15 @@ hr {
   justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;
 }
 
-.masthead-nav {
-  margin-bottom: 3em;
-  border-bottom: var(--border);
-}
-
-@media screen and (min-width: 70em) {
+@media screen and (min-width: 50em) {
   .masthead-nav {
     display: flex;
     gap: 4em;
     align-items: baseline;
-    margin-bottom: 2em;
     border-bottom: none;
+    max-width: 100%;
+    margin: 1em 0 0;
   }
-}
-
-:where(:root.fonts-normal) .masthead-nav {
-  margin-bottom: 1em;
-  border-bottom: none;
 }
 
 :where(.masthead-nav) ul {
@@ -417,11 +310,11 @@ hr {
   gap: 2em;
 }
 
-:where(:root.fonts-normal .masthead-nav) h1 {
-  margin-bottom: 0;
+:where(.masthead-nav) h1 {
+  margin: 0;
 }
 
-@media screen and (min-width: 70em) {
+@media screen and (min-width: 50em) {
   .next-prev {
     display: flex;
     margin: 0;
@@ -458,56 +351,7 @@ hr {
   margin: 0;
 }
 
-.button {
-  background: var(--c-primary);
-  color: var(--c-text);
-  padding: 1em 1.5em;
-  clip-path: var(--p-corners);
-  box-shadow:
-    inset 0 var(--v-border) 0 var(--c-primary-dark),
-    inset 0 calc(var(--v-border) * -1) 0 var(--c-primary-light);
-}
-
-:where(:root.fonts-normal) .button {
-  clip-path: none;
-  border-radius: 0.25em;
-  padding: 0.25em 1em;
-  margin-right: 0.5em;
-}
-
-.button:hover, .button:focus, .button:active,
-:where(a:hover, a:focus, a:active) .button {
-  background: var(--c-primary-dark);
-  color: var(--c-text);
-  box-shadow:
-    inset 0 var(--v-border) 0 var(--c-primary),
-    inset 0 calc(var(--v-border) * -1) 0 var(--c-primary-light-2);
-}
-
 .logo {
-  font-size: var(--f-size);
-  font-weight: 400;
-  background: var(--c-primary);
-  letter-spacing: calc(var(--v-border) * -1);
-  color: var(--c-text);
-  padding: 1em;
-  clip-path: var(--p-corners);
-  box-shadow:
-    inset 0 var(--v-border) 0 var(--c-primary-dark),
-    inset 0 calc(var(--v-border) * -1) 0 var(--c-primary-light);
-  position: relative;
-  top: -3px;
-}
-
-:where(a:hover, a:focus, a:active) .logo {
-  background: var(--c-primary-dark);
-  color: var(--c-text);
-  box-shadow:
-    inset 0 var(--v-border) 0 var(--c-primary),
-    inset 0 calc(var(--v-border) * -1) 0 var(--c-primary-light-2);
-}
-
-:where(:root.fonts-normal) .logo {
   display: inline-block;
   position: relative;
   top: calc(1em / 1.3);
@@ -523,22 +367,18 @@ hr {
   background: var(--c-link);
   color: var(--c-text);
   margin-right: 1em;
-  padding: 0;
-  clip-path: none;
-  box-shadow: none;
-  letter-spacing: normal;
 }
 
-@media screen and (min-width: 70em) {
-  :where(:root.fonts-normal) .logo {
+:where(a:hover, a:focus, a:active) .logo {
+  background: var(--c-hover);
+  color: var(--c-text);
+}
+
+@media screen and (min-width: 50em) {
+  .logo {
     font-size: calc(1em / 3);
     top: calc(1em / 3);
   }
-}
-
-:where(:root.fonts-normal) :where(a:hover, a:focus, a:active) .logo {
-  background: var(--c-hover);
-  box-shadow: none;
 }
 
 :where(.content) img {
@@ -548,9 +388,11 @@ hr {
   border: var(--border);
   background: var(--c-bg-alt);
   max-width: 100%;
+  width: auto;
+  max-height: 80vh;
   height: auto;
 }
 
-:where(.content) :is(p, ul, ol, blockquote, pre, ) {
+:where(.content) :is(p, ul, ol, blockquote, pre) {
   margin-block: 1.5em;
 }

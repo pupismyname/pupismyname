@@ -11,8 +11,6 @@ eleventyNavigation:
 
 ## Fonts
 
-- The [Hourglass](https://damieng.com/typography/zx-origins/hourglass/) font is by [Damien Guard](https://damieng.com/).
-
 - The [Public Sans](https://public-sans.digital.gov/) font is by [Impallari Type](https://github.com/impallari).
   ```
   Copyright (c) 2015, Impallari Type (www.impallari.com)
