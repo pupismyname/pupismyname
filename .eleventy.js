@@ -9,6 +9,7 @@ module.exports = ((eleventyConfig) => {
 
   eleventyConfig.setServerOptions({
     liveReload: false, // disable live reload so event listeners keep working
+    port: 8081, // avoid conflict with nginx
   });
 
   eleventyConfig.setWatchThrottleWaitTime(1000);
@@ -21,10 +22,12 @@ module.exports = ((eleventyConfig) => {
 
   // eleventyConfig.addPassthroughCopy({ 'styles': '/s/styles' });
   eleventyConfig.addPassthroughCopy({ 'assets': '/s' });
-  eleventyConfig.addPassthroughCopy('**/*.png');
-  eleventyConfig.addPassthroughCopy('**/*.jpg');
-  eleventyConfig.addPassthroughCopy('**/*.gif');
-  eleventyConfig.addPassthroughCopy('**/*.webp');
+  // copy any images that go along with content
+  eleventyConfig.addPassthroughCopy('content/**/*.png');
+  eleventyConfig.addPassthroughCopy('content/**/*.jpg');
+  eleventyConfig.addPassthroughCopy('content/**/*.gif');
+  eleventyConfig.addPassthroughCopy('content/**/*.webp');
+  eleventyConfig.addPassthroughCopy('content/**/*.svg');
 
   eleventyConfig.addFilter('metadataDateTime', (dateObj) => {
     const dt = DateTime.fromJSDate(dateObj, { zone: 'America/Chicago' }).setZone('utc');
