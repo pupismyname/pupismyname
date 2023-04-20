@@ -74,7 +74,11 @@ Install some prerequisites with `apk`. The `tar` and `curl` packages are used to
 apk add --no-cache tar curl bash
 ```
 
-Go to the [Speedtest CLI](https://www.speedtest.net/apps/cli) website, scroll down, and expand the _Download for Linux_ button. The DS220+ has an Intel Celeron, so copy the link for the `x86_64` file. The link will look something like `https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-x86_64.tgz`.
+Go to the [Speedtest CLI](https://www.speedtest.net/apps/cli) website, scroll down, and expand the _Download for Linux_ button. The DS220+ has an Intel Celeron, so copy the link for the `x86_64` file. The link will look something like this:
+
+```
+https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-x86_64.tgz
+```
 
 Back in Terminal, run the following commands to install the Speedtest CLI. Don't forget to replace `[link you copied above]` with the actual link.
 
