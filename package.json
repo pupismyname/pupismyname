@@ -19,7 +19,9 @@
     "cheerio": "^1.0.0-rc.12",
     "cssnano": "^5.1.15",
     "luxon": "^3.2.1",
+    "normalize.css": "^8.0.1",
     "postcss": "^8.4.21",
+    "postcss-import": "^15.1.0",
     "sharp": "^0.31.3"
   }
 }
