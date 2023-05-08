@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean; npx @11ty/eleventy",
+    "build": "npm run clean; npm run build:css; ENV=production npx @11ty/eleventy",
+    "build:css": "node -e 'require(\"./lib/process-styles.js\")();'",
     "clean": "rm -rf _site",
-    "dev": "npm run clean; npx @11ty/eleventy --serve --incremental --quiet",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm run clean; npm run watch:css & ENV=development npx @11ty/eleventy --serve --incremental --quiet",
+    "watch:css": "watch 'npm run build:css' ./styles"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.21",
     "postcss-import": "^15.1.0",
-    "sharp": "^0.31.3"
+    "sharp": "^0.31.3",
+    "watch": "^1.0.2"
   }
 }

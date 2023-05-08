@@ -6,25 +6,25 @@ const eleventyFriendlyImages = require('./lib/eleventy-friendly-images');
 module.exports = ((eleventyConfig) => {
 
   eleventyConfig.setServerOptions({
-    port: 8081, // avoid conflict with nginx
+    port: 8169,
+    domDiff: false,
+    watch: ['_site/s/**/*'],
   });
 
-  // eleventyConfig.setWatchThrottleWaitTime(1000);
+  eleventyConfig.setServerPassthroughCopyBehavior('passthrough');
 
   eleventyConfig.addPlugin(eleventyNavigation);
   eleventyConfig.addPlugin(eleventyPluginRss);
   eleventyConfig.addPlugin(eleventyFriendlyImages, { selector: '.content img' });
 
-  eleventyConfig.addWatchTarget('assets');
-  eleventyConfig.addWatchTarget('styles');
-
   eleventyConfig.addPassthroughCopy({ 'assets': '/s' });
-  // copy any images that go along with content
+  // copy any images and styles that go along with content
   eleventyConfig.addPassthroughCopy('content/**/*.png');
   eleventyConfig.addPassthroughCopy('content/**/*.jpg');
   eleventyConfig.addPassthroughCopy('content/**/*.gif');
   eleventyConfig.addPassthroughCopy('content/**/*.webp');
   eleventyConfig.addPassthroughCopy('content/**/*.svg');
+  eleventyConfig.addPassthroughCopy('content/**/*.css');
 
   eleventyConfig.addFilter('metadataDateTime', (dateObj) => {
     const dt = DateTime.fromJSDate(dateObj, { zone: 'America/Chicago' }).setZone('utc');

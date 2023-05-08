@@ -23,7 +23,7 @@ builds to `_site`
 ```
 npm run dev
 ```
-spins up http://localhost:8081 and watches for changes
+spins up http://localhost:8169 and watches for changes
 
 
 
