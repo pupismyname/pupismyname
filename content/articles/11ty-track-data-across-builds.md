@@ -1,5 +1,6 @@
 ---
 title: Track data across builds in 11ty
+desc: Count how many rebuilds 11ty has done in the current session.
 date: 2022-12-06 19:38:45
 ---
 
@@ -95,5 +96,7 @@ async function build () {
 If you're wondering why I'm using `fs.watch` and not 11ty's `.addWatchTarget`, or why I'm building styles with an 11ty template in the first place, I'm planning on writing articles about those topics in the future.
 
 When you stop the 11ty `--serve` process, the values reset to their original state. If you wanted to persist the values between sessions, you might look into caching the object to the filesystem. That's beyond the scope of this article.
+
+Modifying `.eleventy.js` itself will also reset the values to their original state.
 
 Other things you might track are the date/time of the first build, or the date/time of the previous build. Good luck!

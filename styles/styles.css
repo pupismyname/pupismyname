@@ -136,8 +136,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 { font-size: 2.2em; }
-h2 { font-size: 1.4em; }
-h3 { font-size: 1.2em; }
+h2 { font-size: 1.6em; }
+h3 { font-size: 1.4em; }
 
 code {
   display: inline-block;
@@ -279,8 +279,17 @@ hr {
   margin-right: 0;
 }
 
+.desc {
+  margin: 0;
+  padding: 0;
+}
+
 .subdued {
   opacity: 0.5;
+}
+
+.subdued-more {
+  opacity: 0.25;
 }
 
 .small {
@@ -316,15 +325,17 @@ hr {
   margin: 0;
 }
 
-@media screen and (min-width: 50em) {
-  .next-prev {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    gap: 1em;
-    justify-content: space-between;
-  }
+.next-prev-controls {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  gap: 1em;
+  justify-content: space-between;
+}
+
+.next-prev-control-next {
+  text-align: right;
 }
 
 :where(.footer-nav) ul {

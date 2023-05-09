@@ -6,11 +6,14 @@
 {%- endif -%}
 <div class="content">
   <ul class="content-list">
-    {%- for item in list -%}
+    {%- for item in list %}
       <li class="content-list-item">
         <h3><a href="{{ item.url }}">{{ item.data.title }}</a></h3>
+        {%- if item.data.desc %}
+          <p class="desc">{{ item.data.desc }}</p>
+        {%- endif %}
         <div class="subdued small">{{item.date | readableDateTime}}</div>
-        {%- if listTags -%}
+        {%- if listTags %}
           <div class="subdued small">
             {%- for tag in item.data.tags %}
               {%- unless tag == 'content' %}

@@ -1,5 +1,6 @@
 ---
 title: Automate Speedtest CLI on a Synology NAS
+desc: How to set up the Speedtest CLI and run automated Speedtests on your Synology NAS.
 date: 2023-02-10 15:00:00
 ---
 

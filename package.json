@@ -3,12 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "watch": {
+    "build:css": {
+      "patterns": [ "styles" ],
+      "extensions": "css",
+      "quiet": false
+    }
+  },
   "scripts": {
     "build": "npm run clean; npm run build:css; ENV=production npx @11ty/eleventy",
     "build:css": "node -e 'require(\"./lib/process-styles.js\")();'",
     "clean": "rm -rf _site",
     "dev": "npm run clean; npm run watch:css & ENV=development npx @11ty/eleventy --serve --incremental --quiet",
-    "watch:css": "watch 'npm run build:css' ./styles"
+    "watch:css": "npm-watch"
   },
   "author": "",
   "license": "ISC",
@@ -21,9 +28,9 @@
     "cssnano": "^5.1.15",
     "luxon": "^3.2.1",
     "normalize.css": "^8.0.1",
+    "npm-watch": "^0.11.0",
     "postcss": "^8.4.21",
     "postcss-import": "^15.1.0",
-    "sharp": "^0.31.3",
-    "watch": "^1.0.2"
+    "sharp": "^0.31.3"
   }
 }

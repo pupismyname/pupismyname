@@ -11,8 +11,6 @@ module.exports = ((eleventyConfig) => {
     watch: ['_site/s/**/*'],
   });
 
-  eleventyConfig.setServerPassthroughCopyBehavior('passthrough');
-
   eleventyConfig.addPlugin(eleventyNavigation);
   eleventyConfig.addPlugin(eleventyPluginRss);
   eleventyConfig.addPlugin(eleventyFriendlyImages, { selector: '.content img' });
@@ -25,6 +23,7 @@ module.exports = ((eleventyConfig) => {
   eleventyConfig.addPassthroughCopy('content/**/*.webp');
   eleventyConfig.addPassthroughCopy('content/**/*.svg');
   eleventyConfig.addPassthroughCopy('content/**/*.css');
+  eleventyConfig.addPassthroughCopy('content/**/*.js');
 
   eleventyConfig.addFilter('metadataDateTime', (dateObj) => {
     const dt = DateTime.fromJSDate(dateObj, { zone: 'America/Chicago' }).setZone('utc');

@@ -6,4 +6,6 @@ module.exports = {
     "content"
   ],
   collection: "articles",
+  collectionTitle: "Articles",
+  collectionItemTitle: "Article",
 };
