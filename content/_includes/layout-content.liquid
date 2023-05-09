@@ -5,15 +5,19 @@ title: Content
 <div class="header">
   <h1>{{title}}</h1>
   <p class="subdued small">{{page.date | readableDateTime}}</p>
-{%- unless date -%}
-  <p>
-    <b>! ! ! ! ! !</b> Don't forget your metadata date <b>! ! ! ! ! !</b><br><br>
-    <code>date: {{page.date | metadataDateTime}}</code><br><br>
-    What you see now is UTC, ready to copy and paste into your metadata.<br><br>
-    <b>! ! ! ! ! !</b> Don't forget your metadata date <b>! ! ! ! ! !</b>
-  </p>
-{%- endunless -%}
 </div>
+{%- unless date -%}
+  <hr>
+  <h1>! ! ! Don't forget the metadata date ! ! !</h1>
+  <dl>
+    <dt>Date file was created:</dt>
+    <dd><code>date: {{ page.date | date: "%Y-%m-%d %H:%M:%S", "UTC" }}</code></dd>
+    <dt>Current date:</dt>
+    <dd><code>date: {{ "now" | date: "%Y-%m-%d %H:%M:%S", "UTC" }}</code></dd>
+  </dl>
+  <p>Choose one and copy/paste into your front matter. It's already in UTC.</p>
+  <h1>! ! ! Don't forget the metadata date ! ! !</h1>
+{%- endunless -%}
 <hr>
 <div class="content">
   {{ content }}
