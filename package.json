@@ -7,14 +7,15 @@
     "build:css": {
       "patterns": [ "styles" ],
       "extensions": "css",
-      "quiet": false
+      "quiet": false,
+      "runOnChangeOnly": false
     }
   },
   "scripts": {
-    "build": "npm run clean; npm run build:css; ENV=production npx @11ty/eleventy",
+    "build": "npm run clean; npm run build:css; npx @11ty/eleventy",
     "build:css": "node -e 'require(\"./lib/process-styles.js\")();'",
     "clean": "rm -rf _site",
-    "dev": "npm run clean; npm run watch:css & ENV=development npx @11ty/eleventy --serve --incremental --quiet",
+    "dev": "npm run clean; npm run build:css; npm run watch:css & npx @11ty/eleventy --serve --incremental --quiet",
     "watch:css": "npm-watch"
   },
   "author": "",

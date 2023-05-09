@@ -147,6 +147,16 @@ code {
   font-family: var(--f-code);
 }
 
+:where(a) code,
+:where(a) pre {
+  color: var(--c-link);
+}
+
+:where(a:hover, a:focus, a:active) code,
+:where(a:hover, a:focus, a:active) pre {
+  color: var(--c-hover);
+}
+
 pre {
   font-family: var(--f-code);
   font-size: var(--f-size-code);
