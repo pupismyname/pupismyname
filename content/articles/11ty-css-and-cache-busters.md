@@ -170,6 +170,6 @@ This only affects the development process. On a full build from scratch, the cac
 
   {%- assign linkrel = '<link rel="stylesheet" href="/s/styles/styles.min.css?v={{cacheBusters.styles}}">' %}
   ```
-    {{ linkrel }}
+  {{ linkrel }}
   ```
   This can be expanded to work for any asset. Styles, scripts, images, whatever.
