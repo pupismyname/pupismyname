@@ -29,23 +29,25 @@ I also added an npm script called `watch:css` to watch the source stylesheet for
 
 ## Requirement 2: Automate cache busters
 
-When a user visits the site, they should always get the latest version of the CSS. There are many ways to accomplish this, but I was looking for something lightweight and simple, with very few dependencies. I ended up spinning up my own solution.
+When a user visits the site, they should always get the latest version of the CSS. I like to accomplish this by placing a querystring parameter at the end of asset urls, like `style.css?v=[cache-buster]`, where the value changes any time the asset has changed. There are many ways to generate a cache buster string like this, but I was looking for something lightweight and simple, with very few dependencies. I ended up spinning up my own solution.
 
 I placed a file in 11ty's [`_data` folder](https://www.11ty.dev/docs/data-global/) called `cacheBusters.js`. This creates a `cacheBusters` object that you can reference in your templates. This file references a small module I wrote called `get-hash` that generates a hash based on a string or a file. This allows me to generate a hash based on the minified CSS from the `postcss` process above.
 
 This hash remains the same if the input doesn't change. If there are any problems generating the hash from the input, the module writes out the error and returns a fake hash based on a random number. This means that even in an error state, the result will still be useful for cache busting. The worst that will happen is the user will download the unchanged CSS again on a later visit.
 
+This could probably be turned into an 11ty shortcode at some point.
+
 ---
 
 ## Requirement 3: Don't do a full 11ty rebuild just for new CSS
 
-When you're in development mode and running the things locally, you don't really need the entire site rebuilt every time the CSS changes, just to update the cache buster. In a pinch, you could force a reload with cache disabled, but we can do better than that.
+When you're in development mode and running the things locally, you usually don't want to rebuild the entire site just to update the cache buster. In a pinch, you can manually reload with cache disabled, but we can do better than that.
 
-By disconnecting the CSS build process from 11ty, this problem is already half solved. Even though the hash would theoretically be different whenever the CSS changes, 11ty is not aware anythibg has changed because we didn't tell it to [watch anything](https://www.11ty.dev/docs/watch-serve/) related to the CSS. So hash remains the same in the HTML.
+By disconnecting the CSS build process from 11ty, we don't have to worry about 11ty rebuilding the entire site when the CSS changes, because we didn't tell it to [watch anything](https://www.11ty.dev/docs/watch-serve/) related to the CSS. So the cache buster will stay the same in local development (unless the site is rebuilt for some other reason).
 
-You might say that this defeats the purpose of a cache buster, and you'd be right. How does the browser know it needs to load the updated CSS? The answer is to explicitly tell [11ty dev server](https://www.11ty.dev/docs/dev-server/) to [watch for changes](https://www.11ty.dev/docs/dev-server/#options) to the CSS file (which isn't the same thing as [telling 11ty to watch the CSS](https://www.11ty.dev/docs/watch-serve/), which would trigger a build). By default, 11ty dev server watches HTML files in `_site` for changes, but you can tell it to watch other files too, like our stylesheet. This means the browser will hot-reload the CSS when it detects a change, regardless of the value of the cache buster.
+You might say that this defeats the purpose of a cache buster, and you'd be right. How does the browser know it needs to load the updated CSS? The answer is to explicitly tell [11ty dev server](https://www.11ty.dev/docs/dev-server/) to [watch for changes](https://www.11ty.dev/docs/dev-server/#options) to the CSS file. This isn't the same thing as [telling 11ty to watch the CSS](https://www.11ty.dev/docs/watch-serve/), which would trigger a build. By default, 11ty dev server watches HTML files in `_site` for changes, but you can tell it to watch other files too, like the stylesheet. The dev server will hot-reload the stylesheet whenever it detects a change, regardless of the value of the cache buster in the HTML.
 
-This only affects the development process. On a full build from scratch, the cache buster works as expected.
+This only affects the development process running on 11ty dev server. In production, the cache buster will reflect any changes in the stylesheet.
 
 ---
 
