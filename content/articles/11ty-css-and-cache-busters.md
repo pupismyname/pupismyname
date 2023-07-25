@@ -53,6 +53,14 @@ This only affects the development process running on 11ty dev server. In product
 
 ## Shut up and show me the code already
 
+- Install the additional modules in terminal.
+  ```
+  npm i postcss --save-dev
+  npm i postcss-import --save-dev
+  npm i cssnano --save-dev
+  npm i npm-watch --save-dev
+  ```
+
 - `lib/process-styles.js` builds the final CSS and sourcemap and moves the files to the 11ty output folder.
   ```
   const fs = require('fs');
@@ -93,7 +101,7 @@ This only affects the development process running on 11ty dev server. In product
   };
   ```
 
-- `package.json` contains the `build:css` and `watch:css` npm scripts, as well as the `npm-watch` config.
+- `package.json` contains the `build:css` and `watch:css` npm scripts, as well as the `npm-watch` config. Your root stylesheet will be `styles/styles.css`. If you want to change this, update the `watch` below and update the path in `process-styles.js` above.
 
   ```
   …
@@ -105,7 +113,7 @@ This only affects the development process running on 11ty dev server. In product
       "runOnChangeOnly": false
     }
   },
-    "scripts": {
+  "scripts": {
     "build": "npm run clean; npm run build:css; npx @11ty/eleventy",
     "build:css": "node -e 'require(\"./lib/process-styles.js\")();'",
     "clean": "rm -rf _site",
@@ -175,3 +183,11 @@ This only affects the development process running on 11ty dev server. In product
   {{ linkrel }}
   ```
   This can be expanded to work for any asset. Styles, scripts, images, whatever.
+
+- Add a watch target to the server config in `.eleventy.js` so it will reload the browser when `postcss` updates the stylesheet:
+
+  ```
+    eleventyConfig.setServerOptions({
+      watch: ['_site/s/**/*'],
+    });
+  ```
