@@ -1,0 +1,14 @@
+---
+layout: layout-content.liquid
+eleventyExcludeFromCollections: true
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+permalink: /tags/{{ tag }}/
+eleventyComputed:
+  title: "{{ tag | processTag }}"
+---
+
+{% assign list = collections[tag] | reverse %}
+{% include "list-all.liquid", list: list, listCategory: true, listTags: true -%}

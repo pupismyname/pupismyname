@@ -1,12 +1,9 @@
 ---
-layout: layout-main.liquid
+layout: layout-content.liquid
 title: Credits
 eleventyNavigation:
   key: Credits
   order: 3
----
-
-# Credits
 ---
 
 ## Fonts

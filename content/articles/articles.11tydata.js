@@ -1,11 +1,14 @@
 module.exports = {
   layout: "layout-content.liquid",
   title: "Article",
+  desc: "description",
   tags: [
     "articles",
-    "content"
+    "content",
   ],
-  collection: "articles",
-  collectionTitle: "Articles",
-  collectionItemTitle: "Article",
+  category: {
+    name: "articles",
+    plural: "Articles",
+    singular: "Article",
+  },
 };

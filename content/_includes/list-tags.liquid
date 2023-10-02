@@ -1,0 +1,16 @@
+{%- if category == blank %}
+  {%- assign category = item.data.category %}
+{%- endif %}
+{%- if tags == blank %}
+  {%- assign tags = item.data.tags %}
+{%- endif %}
+{%- if listCategory %}
+  <a href="/{{ category.name }}/">{{ category.singular }}</a>
+{%- endif %}
+{%- if listTags %}
+  {%- for tag in tags %}
+    {%- unless tag == 'content' or tag == category.name %}
+      <a href="/tags/{{ tag }}/">{{ tag }}</a>
+    {%- endunless %}
+  {%- endfor %}
+{%- endif %}

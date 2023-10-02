@@ -4,7 +4,7 @@
   "eleventyExcludeFromCollections": true,
   "metadata": {
     "title": "John Brooks",
-    "subtitle": "Welcome to my web site",
+    "subtitle": "The personal website of John Brooks, web developer from Omaha, Nebraska, USA.",
     "language": "en",
     "url": "https://www.pupismyname.com/",
     "author": {
@@ -18,8 +18,8 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ metadata.url }}">
   <title>{{ metadata.title }}</title>
   <subtitle>{{ metadata.subtitle }}</subtitle>
-  <link href="{{ permalink | absoluteUrl(metadata.url) }}" rel="self"/>
-  <link href="{{ metadata.url }}"/>
+  <link href="{{ permalink | absoluteUrl(metadata.url) }}" rel="self" />
+  <link href="{{ metadata.url }}" />
   <updated>{{ collections.content | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
   <id>{{ metadata.url }}</id>
   <author>
@@ -30,7 +30,7 @@
   {%- set absolutePostUrl = post.url | absoluteUrl(metadata.url) %}
   <entry>
     <title>{{ post.data.title }}</title>
-    <link href="{{ absolutePostUrl }}"/>
+    <link href="{{ absolutePostUrl }}" />
     <updated>{{ post.date | dateToRfc3339 }}</updated>
     <id>{{ absolutePostUrl }}</id>
     <content xml:lang="{{ metadata.language }}" type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>

@@ -1,69 +1,44 @@
-<hr>
-<div class="next-prev">
 
-  <div class="next-prev-control next-prev-collection">
-    {%- assign nextPost = collections.content | getNextCollectionItem: currentPage %}
-    {%- assign previousPost = collections.content | getPreviousCollectionItem: currentPage %}
-    <h3>Explore the site</h3>
-    <ul class="next-prev-controls">
-      <li class="next-prev-control-prev">
-        <span class="subdued">&larr; Previous</span>
-        <br>
-        {%- if previousPost %}
-          <a href="{{ previousPost.url | url }}">{{ previousPost.data.title }}</a>
-          <br>
-          <span class="subdued-more small">{{ previousPost.data.collectionItemTitle }}</span>
-        {% else %}
-          <span class="subdued-more">You're at the beginning</span>
-        {% endif %}
-      </li>
-      {% comment %} <li>
-        <span class="subdued">You are here &uarr;</span>
-        <br>
-        <a href="{{ permalink }}">{{ title }}</a>
-      </li> {% endcomment %}
-      <li class="next-prev-control-next">
-        <span class="subdued">Next &rarr;</span>
-        <br>
-        {%- if nextPost %}
-          <a href="{{ nextPost.url | url }}">{{ nextPost.data.title }}</a>
-          <br>
-          <span class="subdued-more small">{{ nextPost.data.collectionItemTitle }}</span>
-        {% else %}
-          <span class="subdued-more">You're at the end</span>
-        {% endif %}
-      </li>
-    </ul>
-  </div>
+<div class="next-prev">
 
   <hr>
 
   <div class="next-prev-control next-prev-collection">
-    {%- assign nextPost = coll | getNextCollectionItem: currentPage %}
-    {%- assign previousPost = coll | getPreviousCollectionItem: currentPage %}
-    <h3>Explore {{ collectionTitle }}</h3>
+    {%- assign nextPost = collections.content | getNextCollectionItem: currentPage %}
+    {%- assign previousPost = collections.content | getPreviousCollectionItem: currentPage %}
     <ul class="next-prev-controls">
       <li class="next-prev-control-prev">
-        <span class="subdued">&larr; Previous {{ collectionItemTitle }}</span>
+        {%- if previousPost %}
+          <a href="{{ previousPost.url | url }}" class="next-prev-control-link">
+        {% endif %}
+        <span class="subdued next-prev-control-text">&larr; Older</span>
         <br>
         {%- if previousPost %}
-          <a href="{{ previousPost.url | url }}">{{ previousPost.data.title }}</a>
+          {{ previousPost.data.title }}
+          <br>
+          <span class="subdued">{{ previousPost.data.category.singular }}</span>
         {% else %}
-          <span class="subdued-more">You're at the beginning</span>
+          <span class="subdued-more">Nothing older</span>
+        {% endif %}
+        {%- if previousPost %}
+          </a>
         {% endif %}
       </li>
-      {% comment %} <li>
-        <span class="subdued">You are here &darr;</span>
-        <br>
-        <a href="{{ permalink }}">{{ title }}</a>
-      </li> {% endcomment %}
       <li class="next-prev-control-next">
-        <span class="subdued">Next {{ collectionItemTitle }} &rarr;</span>
+        {%- if nextPost %}
+          <a href="{{ nextPost.url | url }}" class="next-prev-control-link">
+        {% endif %}
+        <span class="subdued next-prev-control-text">Newer &rarr;</span>
         <br>
         {%- if nextPost %}
-          <a href="{{ nextPost.url | url }}">{{ nextPost.data.title }}</a>
+          {{ nextPost.data.title }}
+          <br>
+          <span class="subdued">{{ nextPost.data.category.singular }}</span>
         {% else %}
-          <span class="subdued-more">You're at the end</span>
+          <span class="subdued-more">Nothing newer</span>
+        {% endif %}
+        {%- if nextPost %}
+          </a>
         {% endif %}
       </li>
     </ul>

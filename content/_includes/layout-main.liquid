@@ -1,80 +1,58 @@
 ---
-title: John Brooks
+layout: layout.liquid
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ title }}</title>
-  <link rel="preload" href="/s/fonts/PublicSans[wght].woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="stylesheet" href="/s/styles/styles.min.css?v={{ cacheBusters.styles }}">
-  <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/s/favicon/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/s/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="180x180" href="/s/favicon/favicon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/s/favicon/favicon-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/s/favicon/favicon-512x512.png">
-  <link rel="apple-touch-icon-precomposed" sizes="192x192" href="/s/favicon/favicon-192x192.png">
-  <link href="https://mastodon.social/@pupismyname" rel="me">
-  <meta name="generator" content="{{ eleventy.generator }}">
-  {% comment %} <meta name="view-transition" content="same-origin"> {% endcomment %}
-</head>
-<body>
 
-  <div class="container">
-    <div class="grid">
+<div class="layout-main">
 
-      <nav class="grid-masthead">
-        <div class="masthead-nav">
-          <h1><a href="/"><span class="logo">//---</span> John Brooks</a></h1>
-          {{ collections.all | eleventyNavigation | eleventyNavigationToHtml }}
-        </div>
-        <hr>
+  <header class="grid-masthead">
+    <div class="masthead-nav">
+      <h1><a href="/"><span class="logo">//---</span> John Brooks</a></h1>
+      <nav>
+        {{ collections.all | eleventyNavigation | eleventyNavigationToHtml }}
       </nav>
-
-      <nav class="grid-sidebar">
-        <div class="section">
-          <h2>About</h2>
-          <p>My name is <strong>John Brooks</strong>, sometimes known as <strong>pupismyname</strong> or <strong>pup</strong>. I live in <strong>Omaha, Nebraska</strong>, USA. I'm a front-end web developer, specializing in User Experience, HTML, CSS, and Javascript.</p>
-        </div>
-        <div class="section">
-          <h2>Work</h2>
-          <ul class="listing">
-            <li><a href="https://www.ookla.com/">Ookla</a></li>
-            <li><a href="https://www.speedtest.net/">Speedtest</a></li>
-            <li><a href="https://www.georgiagoldenolympics.org/">Georgia Golden Olympics</a></li>
-            <li><a href="https://www.linomafc.com/">Linoma FC</a></li>
-            <li><a href="https://www.weshouldhavewebsite.com/">We Should Have Website</a></li>
-          </ul>
-        </div>
-        <div class="section">
-          <h2>Contact</h2>
-          <ul class="listing">
-            <li><a href="https://mastodon.social/@pupismyname" rel="me">@pupismyname</a></li>
-            <li><a href="https://github.com/pupismyname">Github</a></li>
-            <li><a href="https://codepen.io/pupismyname/">CodePen</a></li>
-            <li><a href="mailto:john.brooks@gmail.com">Email</a></li>
-          </ul>
-        </div>
-        <hr>
-      </nav>
-
-      <main class="grid-main">
-        {{ content }}
-        <hr>
-      </main>
-
-      <footer class="grid-footer">
-        <nav class="footer-nav">
-          {{ collections.all | eleventyNavigation | eleventyNavigationToHtml }}
-        </nav>
-      </footer>
-
     </div>
-  </div>
+    <hr>
+  </header>
 
-  {% include "js-scroll-to-top" %}
+  <aside class="grid-sidebar">
+    <div class="section">
+      <h2 class="sidebar-header">About</h2>
+      <p>My name is <strong>John Brooks</strong>. I live in <strong>Omaha, Nebraska</strong>, USA. I'm a front-end web developer, specializing in User Experience, HTML, CSS, and a sprinkling of Javascript.</p>
+      <p>I'm known in some vanishingly small circles as <strong>pupismyname</strong> or <strong>pup</strong>.</p>
+      <p>You'd think that after doing this for 25 years I'd have a cooler website. But instead I have this.</p>
+    </div>
+    <div class="section">
+      <h2 class="sidebar-header">Work</h2>
+      <ul class="listing">
+        <li><a href="https://www.ookla.com/">Ookla</a></li>
+        <li><a href="https://www.speedtest.net/">Speedtest</a></li>
+        <li><a href="https://www.georgiagoldenolympics.org/">Georgia Golden Olympics</a></li>
+        <li><a href="https://www.linomafc.com/">Linoma FC</a></li>
+        <li><a href="https://www.weshouldhavewebsite.com/">We Should Have Website</a></li>
+      </ul>
+    </div>
+    <div class="section">
+      <h2 class="sidebar-header">Contact</h2>
+      <ul class="listing">
+        <li><a href="/resume/">Resume</a></li>
+        <li><a href="https://mastodon.social/@pupismyname" rel="me">Mastodon</a></li>
+        <li><a href="https://github.com/pupismyname">Github</a></li>
+        <li><a href="https://codepen.io/pupismyname/">CodePen</a></li>
+        <li><a href="mailto:john.brooks@gmail.com">Email</a></li>
+      </ul>
+    </div>
+    <hr>
+  </aside>
 
-</body>
-</html>
+  <main class="grid-main">
+    {{ content }}
+    <hr>
+  </main>
+
+  <footer class="grid-footer">
+    <nav class="footer-nav">
+      {{ collections.all | eleventyNavigation | eleventyNavigationToHtml }}
+    </nav>
+  </footer>
+
+</div>

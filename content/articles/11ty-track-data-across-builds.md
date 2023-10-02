@@ -1,6 +1,8 @@
 ---
 title: Track data across builds in 11ty
 desc: Count how many rebuilds 11ty has done in the current session.
+tags:
+  - 11ty
 date: 2022-12-06 19:38:45
 ---
 

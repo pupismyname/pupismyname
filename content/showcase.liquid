@@ -1,12 +1,7 @@
 ---
-layout: layout-main.liquid
-excludeFromCollections: true
-title: Showcase
 eleventyNavigation:
   key: Showcase
+  url: /showcase/
   order: 2
+permalink: false
 ---
-<h1>Showcase</h1>
-<hr>
-{%- assign list = collections.showcase | reverse -%}
-{%- include "list-all", list: list, listTags: false -%}

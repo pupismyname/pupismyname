@@ -2,25 +2,35 @@
 layout: layout-main.liquid
 title: Content
 ---
-{%- assign titleSlug = title | slugify %}
-<div class="header">
-  <h1 style="view-transition-name: header-{{ titleSlug }}">{{ title }}</h1>
-  <p style="view-transition-name: date-{{ titleSlug }}" class="subdued small">{{ page.date | readableDateTime }}</p>
-</div>
-{%- unless date -%}
+
+{% assign titleSlug = title | slugify -%}
+<div class="title">
+  <h1 class="title-title">{{ title }}</h1>
+  {% if date -%}
+    <p class="title-desc subdued small">{{ date | readableDateTime }}</p>
+  {% endif -%}
+  {% if date -%}
+    <p class="title-tags subdued small">
+      {% include "list-tags.liquid", category: category, tags: tags, listCategory: true, listTags: true -%}
+    </p>
+  {% endif -%}
   <hr>
-  <h1>! ! ! Don't forget the metadata date ! ! !</h1>
-  <dl>
-    <dt>Date file was created:</dt>
-    <dd><code>date: {{ page.date | date: "%Y-%m-%d %H:%M:%S", "UTC" }}</code></dd>
-    <dt>Current date:</dt>
-    <dd><code>date: {{ "now" | date: "%Y-%m-%d %H:%M:%S", "UTC" }}</code></dd>
-  </dl>
-  <p>Choose one and copy/paste into your front matter. It's already in UTC.</p>
-  <h1>! ! ! Don't forget the metadata date ! ! !</h1>
-{%- endunless -%}
-<hr>
+</div>
+{% if desc -%}
+  {% unless date -%}
+    <h1>! ! ! Don't forget the metadata date ! ! !</h1>
+    <dl>
+      <dt>Date file was created:</dt>
+      <dd><code>date: {{ page.date | date: "%Y-%m-%d %H:%M:%S", "UTC" }}</code></dd>
+      <dt>Current date:</dt>
+      <dd><code>date: {{ "now" | date: "%Y-%m-%d %H:%M:%S", "UTC" }}</code></dd>
+    </dl>
+    <p>Choose one and copy/paste into your front matter. It's already in UTC.</p>
+    <h1>! ! ! Don't forget the metadata date ! ! !</h1>
+    <hr>
+  {% endunless -%}
+{% endif -%}
 <div class="content">
   {{ content }}
 </div>
-{%- include "next-prev.liquid", coll: collections[collection], currentPage: page -%}
+{% include "next-prev.liquid", coll: collections[category], currentPage: page -%}

@@ -5,7 +5,9 @@
   "main": "index.js",
   "watch": {
     "build:css": {
-      "patterns": [ "styles" ],
+      "patterns": [
+        "styles"
+      ],
       "extensions": "css",
       "quiet": false,
       "runOnChangeOnly": false
@@ -14,24 +16,25 @@
   "scripts": {
     "build": "npm run clean; npm run build:css; npx @11ty/eleventy",
     "build:css": "node -e 'require(\"./lib/process-styles.js\")();'",
-    "clean": "rm -rf _site",
-    "dev": "npm run clean; npm run build:css; npm run watch:css & npx @11ty/eleventy --serve --incremental --quiet",
-    "watch:css": "npm-watch"
+    "clean": "rm -r _site",
+    "dev": "npm run clean; npm run build:css; concurrently --kill-others-on-fail \"npm run watch\" \"npx @11ty/eleventy --serve --incremental\"",
+    "watch": "npm-watch"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "^2.0.0",
-    "@11ty/eleventy-fetch": "^3.0.0",
+    "@11ty/eleventy-fetch": "^4.0.0",
     "@11ty/eleventy-navigation": "^0.3.5",
     "@11ty/eleventy-plugin-rss": "^1.2.0",
     "cheerio": "^1.0.0-rc.12",
-    "cssnano": "^5.1.15",
+    "concurrently": "^8.2.1",
+    "cssnano": "^6.0.1",
     "luxon": "^3.2.1",
     "normalize.css": "^8.0.1",
     "npm-watch": "^0.11.0",
     "postcss": "^8.4.21",
     "postcss-import": "^15.1.0",
-    "sharp": "^0.31.3"
+    "sharp": "^0.32.6"
   }
 }

@@ -25,10 +25,46 @@ module.exports = ((eleventyConfig) => {
   eleventyConfig.addPassthroughCopy('content/**/*.css');
   eleventyConfig.addPassthroughCopy('content/**/*.js');
 
+  eleventyConfig.addCollection('categories', (collectionApi) => {
+    const content = collectionApi.getFilteredByTag('content');
+    const names = [];
+    const categories = content.map((item) => {
+      return item.data.category;
+    }).filter((category) => {
+      if (!names.includes(category.name)) {
+        names.push(category.name);
+        return true;
+      }
+      return false;
+    }).sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    });
+    return categories;
+  });
+
   eleventyConfig.addFilter('readableDateTime', (dateObj) => {
     const dt = DateTime.fromJSDate(dateObj, { zone: 'utc' }).setZone('America/Chicago');
     return dt.setLocale('en').toLocaleString(DateTime.DATETIME_FULL);
   });
+
+  eleventyConfig.addFilter('processTag', (tag) => {
+    if (tag === 'all') return 'Archive';
+    if (tag === 'articles' || tag === 'showcase') return capitalize(tag);
+    if (tag === 'showcase') return 'Showcase';
+    let transformedTag = tag;
+    if (tag === 'css' || tag === 'js') {
+      transformedTag = tag.toUpperCase();
+    } else {
+      transformedTag = capitalize(tag);
+    }
+    return `Regarding <em>${transformedTag}</em>`;
+  });
+
+  function capitalize (word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
 
   return {
     dir: {

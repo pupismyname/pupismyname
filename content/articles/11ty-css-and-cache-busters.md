@@ -1,6 +1,9 @@
 ---
 title: CSS workflow and cache busters in 11ty
 desc: How I build/watch CSS with cache busters in 11ty.
+tags:
+  - 11ty
+  - css
 date: 2023-05-09 18:41:11
 ---
 During my time with [11ty](https://www.11ty.dev/), I've struggled to incorporate a CSS workflow that met all my needs. My specific requirements:

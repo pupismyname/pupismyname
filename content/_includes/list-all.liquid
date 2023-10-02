@@ -1,27 +1,26 @@
 {%- if list == blank -%}
-  {%- assign list = collections.content | reverse | slice: 0, 20 -%}
+  {%- assign list = collections.content | reverse | slice: 0, 10 -%}
 {%- endif -%}
 {%- if listTags == blank -%}
-  {%- assign listTags = true -%}
+  {%- assign listTags = false -%}
+{%- endif -%}
+{%- if listCategory == blank -%}
+  {%- assign listCategory = false -%}
 {%- endif -%}
 <div class="content">
   <ul class="content-list">
     {%- for item in list %}
       {%- assign titleSlug = item.data.title | slugify %}
-      <li class="content-list-item">
-        <h3 style="view-transition-name: header-{{ titleSlug }}"><a href="{{ item.url }}">{{ item.data.title }}</a></h3>
+      <li class="content-list-item title">
+        <h3 class="title-title"><a href="{{ item.url }}">{{ item.data.title }}</a></h3>
         {%- if item.data.desc %}
-          <p class="desc">{{ item.data.desc }}</p>
+          <p class="title-desc">{{ item.data.desc }}</p>
         {%- endif %}
-        <div style="view-transition-name: date-{{ titleSlug }}" class="subdued small">{{item.date | readableDateTime}}</div>
-        {%- if listTags %}
-          <div class="subdued small">
-            {%- for tag in item.data.tags %}
-              {%- unless tag == 'content' %}
-                <a href="/{{ tag }}/">{{ tag }}</a>
-              {%- endunless %}
-            {%- endfor %}
-          </div>
+        <p class="title-date subdued small">{{item.date | readableDateTime}}</p>
+        {%- if listTags or listCategory %}
+          <p class="title-tags subdued small">
+            {% include "list-tags.liquid", item: item, listCategory: listCategory, listTags: listTags -%}
+          </p>
         {%- endif %}
       </li>
     {%- endfor %}
