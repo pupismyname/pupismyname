@@ -2,7 +2,7 @@
 layout: layout-content.liquid
 eleventyExcludeFromCollections: true
 pagination:
-  data: collections
+  data: collections.filteredTags
   size: 1
   alias: tag
 permalink: /tags/{{ tag }}/
@@ -11,4 +11,4 @@ eleventyComputed:
 ---
 
 {% assign list = collections[tag] | reverse %}
-{% include "list-all.liquid", list: list, listCategory: true, listTags: true -%}
+{% include "list-content.liquid", list: list -%}

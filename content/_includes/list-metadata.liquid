@@ -1,0 +1,19 @@
+{%- if category.name %}
+  <a href="/{{ category.name }}/" class="link-category">{{ category.singular }}</a>
+{% else -%}
+  {%- for item in category %}
+    <a href="/{{ category.name }}/" class="link-category">{{ item.plural }}</a>
+  {%- endfor %}
+{% endif -%}
+
+{% comment %}
+  compare to 2 to account for `all` and category
+{% endcomment %}
+{%- if tags.size > 2 %}
+  <span class="link-tag"> &rarr; </span>
+{% endif -%}
+
+{%- assign filteredTags = tags | filterTags: page.url %}
+{%- for tag in filteredTags %}
+  <a href="/tags/{{ tag }}/" class="link-tag">{{ tag }}</a>
+{%- endfor %}

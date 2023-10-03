@@ -25,12 +25,19 @@ module.exports = ((eleventyConfig) => {
   eleventyConfig.addPassthroughCopy('content/**/*.css');
   eleventyConfig.addPassthroughCopy('content/**/*.js');
 
+  // tags we want to filter out of tag pages and tag listings
+  const filter = [ 'all', 'content', 'categories', 'filteredTags', 'articles', 'showcase' ];
+
+  // generate a collection of categories, used to create category pages like /articles
   eleventyConfig.addCollection('categories', (collectionApi) => {
+    // get all content
     const content = collectionApi.getFilteredByTag('content');
     const names = [];
+    // loop through content
     const categories = content.map((item) => {
       return item.data.category;
     }).filter((category) => {
+      // ignore duplicate categories
       if (!names.includes(category.name)) {
         names.push(category.name);
         return true;
@@ -44,22 +51,59 @@ module.exports = ((eleventyConfig) => {
     return categories;
   });
 
+  // generate a collection of tags, used to list all the tags
+  eleventyConfig.addCollection('filteredTags', (collectionApi) => {
+    // get all content
+    const content = collectionApi.getFilteredByTag('content');
+    const names = [];
+    // loop through content
+    const tags = content.map((item) => {
+      return item.data.tags;
+    }).flat().filter((tag) => {
+      // ignore duplicate categories
+      if (!names.includes(tag)) {
+        names.push(tag);
+        return true;
+      }
+      return false;
+    }).filter((tag) => {
+      return !filter.includes(tag);
+    }).sort((a, b) => {
+      if (a < b) return -1;
+      if (a > b) return 1;
+      return 0;
+    });
+    return tags;
+  });
+
+  // convert UTC date to something like `March 25, 2023, 5:56 PM CDT`
   eleventyConfig.addFilter('readableDateTime', (dateObj) => {
     const dt = DateTime.fromJSDate(dateObj, { zone: 'utc' }).setZone('America/Chicago');
     return dt.setLocale('en').toLocaleString(DateTime.DATETIME_FULL);
   });
 
+  // transform tag to a more display-appropriate format
   eleventyConfig.addFilter('processTag', (tag) => {
+    // special handling of the 'all' tag
     if (tag === 'all') return 'Archive';
+    // don't add "Regarding" to these tags
     if (tag === 'articles' || tag === 'showcase') return capitalize(tag);
-    if (tag === 'showcase') return 'Showcase';
     let transformedTag = tag;
+    // These acronyms should be all caps
     if (tag === 'css' || tag === 'js') {
       transformedTag = tag.toUpperCase();
     } else {
+      // capitalize everything else
       transformedTag = capitalize(tag);
     }
     return `Regarding <em>${transformedTag}</em>`;
+  });
+
+  // transform tag to a more display-appropriate format
+  eleventyConfig.addFilter('filterTags', (tags) => {
+    if (!tags) return;
+    tags = (tags.length) ? tags : Object.keys(tags);
+    return tags.filter((tag) => !filter.includes(tag));
   });
 
   function capitalize (word) {

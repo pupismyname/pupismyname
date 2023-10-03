@@ -16,7 +16,7 @@ title: John Brooks
 
 Since 2011 I've been a front-end web developer for [Ookla](https://www.ookla.com/), the company that created [Speedtest.net](https://www.speedtest.net/). My official job title is _User Experience Engineer_. With the help of several other very talented designers and developers, I wrote a good portion of the markup, styles, and client-side javascript for [Speedtest.net](https://www.speedtest.net/) and [Ookla.com](https://www.ookla.com/). These sites are viewed millions of times a month by people across the world.
 
-I pride myself on creating beautiful, hand-crafted, accessible, and performant websites.
+I pride myself on creating beautiful, hand-crafted, accessible, and performant websites. I've worked remote since 2011 and I absolutely love it.
 
 Apart from work, I love to play and watch soccer, go to concerts, play video games, and make art with code. If there's any time left over, I sometimes help raise my four children. I know how to juggle. I have one tattoo. I enjoy karaoke but I am not very good at it.
 

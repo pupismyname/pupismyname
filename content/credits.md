@@ -19,6 +19,7 @@ eleventyNavigation:
 ## Tools
 
 - This site was built with [11ty](https://www.11ty.dev/).
+- My dev environment consists of [VSCode](https://code.visualstudio.com/), [iTerm2](https://iterm2.com/), [Sourcetree](https://www.sourcetreeapp.com/), and [Firefox](https://www.mozilla.org/en-US/firefox/new/) [DevTools](https://firefox-source-docs.mozilla.org/devtools-user/).
 
 ## Technologies
 
@@ -28,3 +29,5 @@ eleventyNavigation:
 - Vanilla Javascript
 - LiquidJS
 - Markdown
+
+You can view the source code of this website on [Github](https://github.com/pupismyname/pupismyname).

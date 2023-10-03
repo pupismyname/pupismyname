@@ -11,7 +11,11 @@ title: Content
   {% endif -%}
   {% if date -%}
     <p class="title-tags subdued small">
-      {% include "list-tags.liquid", category: category, tags: tags, listCategory: true, listTags: true -%}
+      {% include "list-metadata.liquid" -%}
+    </p>
+  {% else -%}
+    <p class="title-tags subdued small">
+      {% include "list-metadata.liquid", category: collections.categories, tags: collections.filteredTags -%}
     </p>
   {% endif -%}
   <hr>

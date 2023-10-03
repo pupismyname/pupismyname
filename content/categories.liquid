@@ -11,4 +11,4 @@ eleventyComputed:
 ---
 
 {% assign list = collections[category.name] | reverse %}
-{% include "list-all.liquid", list: list, listTags: true -%}
+{% include "list-content.liquid", list: list, listCategories: false, listTags: true -%}

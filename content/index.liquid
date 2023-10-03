@@ -1,6 +1,7 @@
 ---
 layout: layout-main.liquid
 title: John Brooks
+layoutType: index
 eleventyNavigation:
   key: Home
   order: 0
@@ -9,6 +10,6 @@ eleventyNavigation:
   <h1 class="title-title">Latest</h1>
   <hr>
 </div>
-{% include "list-all.liquid", listCategory: true %}
+{% include "list-content.liquid" %}
 <hr>
 <p>Find more in the <a href="/archive/">Archive</a></p>
