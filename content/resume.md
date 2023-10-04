@@ -28,6 +28,7 @@ Apart from work, I love to play and watch soccer, go to concerts, play video gam
 
 - HTML, CSS, Javascript
 - User Experience
+- Responsive design
 - Turning mockups into working websites
 - How to look things up on MDN
 
@@ -35,7 +36,6 @@ Apart from work, I love to play and watch soccer, go to concerts, play video gam
 
 - Web Accessibilty
 - Web Performance
-- Responsive design
 - SVG and other image formats
 - 11ty static site generator
 - Design Systems
