@@ -1,20 +1,18 @@
-{%- if list == blank -%}
-  {%- assign list = collections.content | reverse | slice: 0, 10 -%}
-{%- endif -%}
-<div class="content">
-  <ul class="content-list">
-    {%- for item in list %}
-      {%- assign titleSlug = item.data.title | slugify %}
-      <li class="content-list-item title">
-        <h3 class="title-title"><a href="{{ item.url }}">{{ item.data.title }}</a></h3>
-        {%- if item.data.desc %}
-          <p class="title-desc">{{ item.data.desc }}</p>
-        {%- endif %}
-        <p class="title-date subdued small">{{ item.date | readableDateTime }}</p>
-        <p class="title-tags subdued small">
-          {% include "list-metadata.liquid", category: item.data.category, tags: item.data.tags -%}
-        </p>
-      </li>
-    {%- endfor %}
-  </ul>
-</div>
+{% if list == blank -%}
+  {% assign list = collections.content | reverse | slice: 0, 10 -%}
+{% endif -%}
+<ul class="content-list">
+  {% for item in list -%}
+    {% assign titleSlug = item.data.title | slugify -%}
+    <li class="content-list-item title">
+      <h3 class="title-title"><a href="{{ item.url }}">{{ item.data.title }}</a></h3>
+      {% if item.data.desc -%}
+        <p class="title-desc">{{ item.data.desc }}</p>
+      {% endif -%}
+      <p class="title-date">{{ item.date | readableDateTime }}</p>
+      <p class="title-tags">
+        {% include "list-metadata.liquid", category: item.data.category, tags: item.data.tags -%}
+      </p>
+    </li>
+  {% endfor -%}
+</ul>

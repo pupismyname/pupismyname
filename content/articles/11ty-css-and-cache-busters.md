@@ -181,7 +181,7 @@ This only affects the development process running on 11ty dev server. In product
 
 - With all of the above in place, you can use the `cacheBusters` values in templates as a querystring parameter when referencing an asset.
 
-  {%- assign linkrel = '<link rel="stylesheet" href="/s/styles/styles.min.css?v={{ cacheBusters.styles }}">' %}
+  {% assign linkrel = '<link rel="stylesheet" href="/s/styles/styles.min.css?v={{ cacheBusters.styles }}">' -%}
   ```
   {{ linkrel }}
   ```

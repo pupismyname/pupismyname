@@ -1,7 +1,6 @@
 module.exports = {
   layout: "layout-content.liquid",
   title: "Article",
-  desc: "description",
   tags: [
     "articles",
     "content",

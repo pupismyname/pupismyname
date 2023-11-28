@@ -26,14 +26,14 @@
     <name>{{ metadata.author.name }}</name>
     <email>{{ metadata.author.email }}</email>
   </author>
-  {%- for post in collections.content | reverse %}
-  {%- set absolutePostUrl = post.url | absoluteUrl(metadata.url) %}
+  {% for post in collections.content | reverse -%}
+  {% set absolutePostUrl = post.url | absoluteUrl(metadata.url) -%}
   <entry>
-    <title>{{ post.data.title }}</title>
+    <title>{{ post.data.title }} | John Brooks</title>
     <link href="{{ absolutePostUrl }}" />
     <updated>{{ post.date | dateToRfc3339 }}</updated>
     <id>{{ absolutePostUrl }}</id>
     <content xml:lang="{{ metadata.language }}" type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
   </entry>
-  {%- endfor %}
+  {% endfor -%}
 </feed>

@@ -1,7 +1,12 @@
 ---
+layout: layout-content.liquid
 eleventyNavigation:
   key: Articles
   url: /articles/
   order: 1
-permalink: false
+title: Articles
+desc: Longer articles about a variety of topics.
 ---
+
+{% assign list = collections.articles | reverse -%}
+{% include "list-content.liquid", list: list, listCategories: false, listTags: true -%}

@@ -1,47 +1,42 @@
-
 <div class="next-prev">
-
-  <hr>
-
   <div class="next-prev-control next-prev-collection">
-    {%- assign nextPost = collections.content | getNextCollectionItem: currentPage %}
-    {%- assign previousPost = collections.content | getPreviousCollectionItem: currentPage %}
+    {% assign nextPost = collections.content | getNextCollectionItem: currentPage -%}
+    {% assign previousPost = collections.content | getPreviousCollectionItem: currentPage -%}
     <ul class="next-prev-controls">
       <li class="next-prev-control-prev">
-        {%- if previousPost %}
+        {% if previousPost -%}
           <a href="{{ previousPost.url | url }}" class="next-prev-control-link">
-        {% endif %}
-        <span class="subdued next-prev-control-text">&larr; Older</span>
+        {% endif -%}
+        <span class="next-prev-control-text">&larr; Older</span>
         <br>
-        {%- if previousPost %}
+        {% if previousPost -%}
           {{ previousPost.data.title }}
           <br>
-          <span class="subdued">{{ previousPost.data.category.singular }}</span>
-        {% else %}
-          <span class="subdued-more">Nothing older</span>
-        {% endif %}
-        {%- if previousPost %}
+          <span class="next-prev-control-category">{{ previousPost.data.category.singular }}</span>
+        {% else -%}
+          <span class="next-prev-control-empty">Nothing older</span>
+        {% endif -%}
+        {% if previousPost -%}
           </a>
-        {% endif %}
+        {% endif -%}
       </li>
       <li class="next-prev-control-next">
-        {%- if nextPost %}
+        {% if nextPost -%}
           <a href="{{ nextPost.url | url }}" class="next-prev-control-link">
-        {% endif %}
-        <span class="subdued next-prev-control-text">Newer &rarr;</span>
+        {% endif -%}
+        <span class="next-prev-control-text">Newer &rarr;</span>
         <br>
-        {%- if nextPost %}
+        {% if nextPost -%}
           {{ nextPost.data.title }}
           <br>
-          <span class="subdued">{{ nextPost.data.category.singular }}</span>
-        {% else %}
-          <span class="subdued-more">Nothing newer</span>
-        {% endif %}
-        {%- if nextPost %}
+          <span class="next-prev-control-category">{{ nextPost.data.category.singular }}</span>
+        {% else -%}
+          <span class="next-prev-control-empty">Nothing newer</span>
+        {% endif -%}
+        {% if nextPost -%}
           </a>
-        {% endif %}
+        {% endif -%}
       </li>
     </ul>
   </div>
-
 </div>

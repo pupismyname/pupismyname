@@ -1,28 +1,24 @@
 ---
-layout: layout-main.liquid
-title: Content
+layout: layout-full.liquid
 ---
 
 {% assign titleSlug = title | slugify -%}
 <div class="title">
-  <h1 class="title-title">{{ title }}</h1>
-  {% if date -%}
-    <p class="title-desc subdued small">{{ date | readableDateTime }}</p>
+  <div class="hero">
+    <img id="hero-image" class="hero-image">
+    <div class="hero-contents">
+      <h1 class="title-title">{{ title }}</h1>
+    </div>
+  </div>
+
+  {% if desc -%}
+    <h2 class="title-desc">{{ desc }}</h2>
   {% endif -%}
-  {% if date -%}
-    <p class="title-tags subdued small">
-      {% include "list-metadata.liquid" -%}
-    </p>
-  {% else -%}
-    <p class="title-tags subdued small">
-      {% include "list-metadata.liquid", category: collections.categories, tags: collections.filteredTags -%}
-    </p>
-  {% endif -%}
-  <hr>
+  {% include "content-meta.liquid" -%}
 </div>
-{% if desc -%}
+{% if category -%}
   {% unless date -%}
-    <h1>! ! ! Don't forget the metadata date ! ! !</h1>
+    <h1>!!! Don't forget the metadata date !!!</h1>
     <dl>
       <dt>Date file was created:</dt>
       <dd><code>date: {{ page.date | date: "%Y-%m-%d %H:%M:%S", "UTC" }}</code></dd>
@@ -30,11 +26,17 @@ title: Content
       <dd><code>date: {{ "now" | date: "%Y-%m-%d %H:%M:%S", "UTC" }}</code></dd>
     </dl>
     <p>Choose one and copy/paste into your front matter. It's already in UTC.</p>
-    <h1>! ! ! Don't forget the metadata date ! ! !</h1>
+    <h1>!!! Don't forget the metadata date !!!</h1>
     <hr>
   {% endunless -%}
 {% endif -%}
 <div class="content">
   {{ content }}
 </div>
-{% include "next-prev.liquid", coll: collections[category], currentPage: page -%}
+<hr>
+{% include "content-meta.liquid" -%}
+{% if category -%}
+  {% include "next-prev.liquid", coll: collections[category], currentPage: page -%}
+{% else -%}
+  <p>Find more in the <a href="/archive/">Archive</a></p>
+{% endif -%}

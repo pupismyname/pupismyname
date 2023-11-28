@@ -32,17 +32,14 @@ module.exports = ((eleventyConfig) => {
   eleventyConfig.addCollection('categories', (collectionApi) => {
     // get all content
     const content = collectionApi.getFilteredByTag('content');
-    const names = [];
+    const names = new Set();
     // loop through content
     const categories = content.map((item) => {
       return item.data.category;
-    }).filter((category) => {
-      // ignore duplicate categories
-      if (!names.includes(category.name)) {
-        names.push(category.name);
-        return true;
-      }
-      return false;
+    }).filter((item) => {
+      const has = !names.has(item.name);
+      names.add(item.name);
+      return has;
     }).sort((a, b) => {
       if (a.name < b.name) return -1;
       if (a.name > b.name) return 1;
@@ -77,26 +74,24 @@ module.exports = ((eleventyConfig) => {
   });
 
   // convert UTC date to something like `March 25, 2023, 5:56 PM CDT`
+  // Not sure why, but Netlify outputs  `March 25, 2023 at 5:56 PM CDT`
   eleventyConfig.addFilter('readableDateTime', (dateObj) => {
     const dt = DateTime.fromJSDate(dateObj, { zone: 'utc' }).setZone('America/Chicago');
-    return dt.setLocale('en').toLocaleString(DateTime.DATETIME_FULL);
+    return dt.setLocale('en-US').toLocaleString(DateTime.DATETIME_FULL);
   });
 
   // transform tag to a more display-appropriate format
-  eleventyConfig.addFilter('processTag', (tag) => {
+  eleventyConfig.addFilter('processTag', (tag, categories) => {
     // special handling of the 'all' tag
     if (tag === 'all') return 'Archive';
-    // don't add "Regarding" to these tags
-    if (tag === 'articles' || tag === 'showcase') return capitalize(tag);
-    let transformedTag = tag;
-    // These acronyms should be all caps
-    if (tag === 'css' || tag === 'js') {
-      transformedTag = tag.toUpperCase();
-    } else {
-      // capitalize everything else
-      transformedTag = capitalize(tag);
+    // don't add "Regarding" to category names
+    const isCategory = categories.some((category) => {
+      return category.name === tag;
+    });
+    if (isCategory) {
+      return capitalize(tag);
     }
-    return `Regarding <em>${transformedTag}</em>`;
+    return `Regarding <em>${capitalize(tag)}</em>`;
   });
 
   // transform tag to a more display-appropriate format
@@ -107,7 +102,12 @@ module.exports = ((eleventyConfig) => {
   });
 
   function capitalize (word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
+    // These acronyms should be all caps
+    if (word === 'css' || word === 'js') {
+      return word.toUpperCase();
+    } else {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }
   }
 
   return {

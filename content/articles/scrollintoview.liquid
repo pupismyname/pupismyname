@@ -3,6 +3,8 @@ title: Strange <code>scrollIntoView</code> behavior in Chrome
 desc: Describing and fixing a scrolling bug in Chrome.
 tags:
   - js
+  - html
+  - css
 date: 2022-11-15 19:15:06
 ---
 
@@ -69,8 +71,9 @@ date: 2022-11-15 19:15:06
   }
 
 </style>
+<p>While making a carousel using progressive enhancement principles, I encountered some strange scrolling behavior in Chrome.</p>
 <h2>Set up the carousel</h2>
-<p>I am making a carousel using progressive enhancement principles. The HTML is simple. Each carousel slide has an <code>id</code>, and CSS is used to arrange the slides horizontally in a scrollable container. The browser knows how to scroll vertically and horizontally when you click an anchor link to view a specific slide, so you don't need to use Javascript to animate anything. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior">Smooth scrolling</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Scroll_Snap">snap scrolling</a> are controlled with CSS. The user can navigate through the slides by scrolling horizontally or by clicking the slide links above or below the carousel.</p>
+<p>The HTML is simple. Each carousel slide has an <code>id</code>, and CSS is used to arrange the slides horizontally in a scrollable container. The browser knows how to scroll vertically and horizontally when you click an anchor link to view a specific slide, so you don't need to use Javascript to animate anything. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior">Smooth scrolling</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Scroll_Snap">snap scrolling</a> are controlled with CSS. The user can navigate through the slides by scrolling horizontally or by clicking the slide links above or below the carousel.</p>
 <p>
   <pre>
 :root {

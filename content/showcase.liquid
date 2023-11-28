@@ -1,7 +1,12 @@
 ---
+layout: layout-content.liquid
 eleventyNavigation:
   key: Showcase
   url: /showcase/
   order: 2
-permalink: false
+title: Showcase
+desc: Art, experiments, or neat tricks.
 ---
+
+{% assign list = collections.showcase | reverse -%}
+{% include "list-content.liquid", list: list, listCategories: false, listTags: true -%}

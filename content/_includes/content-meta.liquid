@@ -1,0 +1,11 @@
+{% if date -%}
+  <p class="title-date">Published: {{ date | readableDateTime }}</p>
+{% endif -%}
+
+{% if category -%}
+  <p class="title-tags">{% include "list-metadata.liquid" -%}</p>
+{% endif -%}
+
+{% if date or category -%}
+  <hr>
+{% endif -%}

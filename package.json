@@ -4,6 +4,14 @@
   "description": "",
   "main": "index.js",
   "watch": {
+    "build:js": {
+      "patterns": [
+        "js"
+      ],
+      "extensions": "js",
+      "quiet": false,
+      "runOnChangeOnly": false
+    },
     "build:css": {
       "patterns": [
         "styles"
@@ -14,27 +22,33 @@
     }
   },
   "scripts": {
-    "build": "npm run clean; npm run build:css; npx @11ty/eleventy",
-    "build:css": "node -e 'require(\"./lib/process-styles.js\")();'",
+    "build": "npm run build:prep; npx @11ty/eleventy",
+    "build:css": "node -e 'require(\"./lib/build-styles.js\")();'",
+    "build:js": "node -e 'require(\"./lib/build-javascript.js\")();'",
+    "build:prep": "npm run clean; npm run build:css; npm run build:js",
     "clean": "rm -r _site",
-    "dev": "npm run clean; npm run build:css; concurrently --kill-others-on-fail \"npm run watch\" \"npx @11ty/eleventy --serve --incremental\"",
+    "dev": "npm run build:prep; concurrently --kill-others-on-fail \"npm run watch\" \"npx @11ty/eleventy --serve --incremental\"",
     "watch": "npm-watch"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.0",
+    "concurrently": "^8.2.1",
+    "npm-watch": "^0.11.0"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-fetch": "^4.0.0",
     "@11ty/eleventy-navigation": "^0.3.5",
     "@11ty/eleventy-plugin-rss": "^1.2.0",
     "cheerio": "^1.0.0-rc.12",
-    "concurrently": "^8.2.1",
     "cssnano": "^6.0.1",
-    "luxon": "^3.2.1",
-    "normalize.css": "^8.0.1",
-    "npm-watch": "^0.11.0",
-    "postcss": "^8.4.21",
+    "esbuild": "^0.19.7",
+    "luxon": "^3.4.3",
+    "noisejs": "^2.1.0",
+    "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
+    "seedrandom": "^3.0.5",
     "sharp": "^0.32.6"
   }
 }

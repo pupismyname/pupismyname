@@ -1,19 +1,25 @@
-{%- if category.name %}
-  <a href="/{{ category.name }}/" class="link-category">{{ category.singular }}</a>
+{% assign categories = category | size -%}
+{% if categories == 0 -%}
+  Category: <a href="/{{ category.name }}/" class="link-category">{{ category.singular }}</a>
 {% else -%}
-  {%- for item in category %}
-    <a href="/{{ category.name }}/" class="link-category">{{ item.plural }}</a>
-  {%- endfor %}
+  All categories:
+  {% for item in category -%}
+    <a href="/{{ item.name }}/" class="link-category">{{ item.plural }}</a>
+  {% endfor -%}
 {% endif -%}
 
-{% comment %}
-  compare to 2 to account for `all` and category
-{% endcomment %}
-{%- if tags.size > 2 %}
+{% comment -%}
+  compare to 2 to account for `content` and category
+{% endcomment -%}
+{% if tags.size > 2 -%}
   <span class="link-tag"> &rarr; </span>
+  {% if categories == 0 -%}
+    Tags:
+  {% else -%}
+    All tags:
+  {% endif -%}
+  {% assign filteredTags = tags | filterTags: page.url -%}
+  {% for tag in filteredTags -%}
+    <a href="/tags/{{ tag }}/" class="link-tag">{{ tag }}</a>
+  {% endfor -%}
 {% endif -%}
-
-{%- assign filteredTags = tags | filterTags: page.url %}
-{%- for tag in filteredTags %}
-  <a href="/tags/{{ tag }}/" class="link-tag">{{ tag }}</a>
-{%- endfor %}

@@ -7,8 +7,8 @@ pagination:
   alias: tag
 permalink: /tags/{{ tag }}/
 eleventyComputed:
-  title: "{{ tag | processTag }}"
+  title: "{{ tag | processTag: collections.categories }}"
 ---
 
-{% assign list = collections[tag] | reverse %}
+{% assign list = collections[tag] | reverse -%}
 {% include "list-content.liquid", list: list -%}
