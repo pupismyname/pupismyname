@@ -2,26 +2,37 @@ import seedrandom from 'seedrandom';
 import { Noise } from 'noisejs';
 import { map } from './math.js';
 
-(async () => {
+customElements.define('hero-image', class extends HTMLElement {
 
-  // set up canvas
-  const canvas = document.getElementById('hero-src');
-  if (!canvas) return;
+  constructor () {
+		super();
+    this.toPng = (this.getAttribute('to-png') !== 'false');
+    this.canvas = document.createElement('canvas');
+    if (this.toPng) {
+      this.canvas.classList.add('hero-src');
+      this.img = document.createElement('img');
+      this.img.classList.add('hero-image');
+      this.img.setAttribute('alt', this.getAttribute('alt') || '');
+      this.append(this.img);
+    } else {
+      this.canvas.classList.add('hero-image');
+      this.append(this.canvas);
+    }
+    // draw
+    (async () => {
+      await this.render();
+    })();
+	}
 
-  // get target images
-  const imgs = document.getElementsByClassName('hero-image');
-  if (!imgs.length) return;
-
-  for (let i = 0; i < imgs.length; i++) {
-    const img = imgs[i];
-    const type = img.getAttribute('data-type');
-    const noiseType = img.getAttribute('data-noise-type');
-    const randomType = img.getAttribute('data-random-type');
-    const intensity = img.getAttribute('data-intensity');
-    const tension = img.getAttribute('data-tension');
-    const res = img.getAttribute('data-res');
-    await createImage({
-      canvas,
+  async render () {
+    const type = this.getAttribute('type');
+    const noiseType = this.getAttribute('noise-type');
+    const randomType = this.getAttribute('random-type');
+    const intensity = this.getAttribute('intensity');
+    const tension = this.getAttribute('tension');
+    const res = this.getAttribute('res');
+    await this.createImage({
+      canvas:     this.canvas,
       type:       (type?.length)       ? type                  : undefined,
       noiseType:  (noiseType?.length)  ? noiseType             : undefined,
       randomType: (randomType?.length) ? randomType            : undefined,
@@ -30,11 +41,13 @@ import { map } from './math.js';
       res:        (res?.length)        ? parseFloat(res)       : undefined,
     });
     // copy canvas contents to img src
-    img.src = canvas.toDataURL();
+    if (this.toPng) {
+      this.img.src = this.canvas.toDataURL();
+    }
   }
 
-  async function createImage ({
-    canvas = document.getElementById('hero-src'),
+  async createImage ({
+    canvas = this.canvas,
     type = 'ggrid|nnoise|llines|llines-grid|fflow|splines', // what type of image to draw: 'grid|noise|lines-grid|lines|splines|flow'
     noiseType = '2d', // what type of noise: 'random', '1d', or '2d'
     randomType = 'seed', // random number generator: 'seed' or 'random'
@@ -48,7 +61,8 @@ import { map } from './math.js';
     // set up initial variables
     const rows = 18;
     const cols = rows * 2;
-    const w = Math.round(cols * 60);
+    // width is double the parent element, or if that's not available, something very big
+    const w = Math.round(this.parentElement.offsetWidth * (this.toPng ? 2 : 1) || cols * 60);
     const h = Math.round(w / 3);
     const sizeX = w / cols;
     const sizeY = h / rows;
@@ -56,7 +70,7 @@ import { map } from './math.js';
     const color = 'oklch(67% 0.11 224)'; // --c-secondary
 
     // build initial points array (rows and cols)
-    const points = createPoints(w, h, rows, cols, sizeX, sizeY, intensity, noiseType, randomType, res, tension);
+    const points = this.createPoints(w, h, rows, cols, sizeX, sizeY, intensity, noiseType, randomType, res, tension);
 
     canvas.width = w;
     canvas.height = h;
@@ -65,13 +79,13 @@ import { map } from './math.js';
     // promisify requestAnimationFrame
     return new Promise((resolve) => {
       window.requestAnimationFrame(() => {
-        draw(w, h, ctx, points, lineWidth, color, type, tension);
+        this.draw(w, h, ctx, points, lineWidth, color, type, tension);
         resolve();
       });
     });
   }
 
-  function createPoints (w, h, rows, cols, sizeX, sizeY, intensity, noiseType, randomType, res) {
+  createPoints (w, h, rows, cols, sizeX, sizeY, intensity, noiseType, randomType, res) {
 
     // what function to use for random numbers
     const random = (randomType === 'seed') ?
@@ -79,9 +93,7 @@ import { map } from './math.js';
       Math.random;
 
     // initialize noise field
-    const noise = (noiseType === '1d' || noiseType === '2d') ?
-      new Noise(random()) :
-      undefined;
+    const noise = (noiseType === '1d' || noiseType === '2d') ? new Noise(random()) : undefined;
 
     const paddingX = -sizeX * intensity / 1;
     const paddingY = 0;
@@ -98,16 +110,16 @@ import { map } from './math.js';
           y: map(startY, 0, h, paddingY, h - paddingY),
         };
         if (noiseType === 'random') {
-          point.nx = map(random(), 0, 1, -1, 1); // map from (0 to 1) to (-1 to 1)
-          point.ny = map(random(), 0, 1, -1, 1); // map from (0 to 1) to (-1 to 1)
+          point.nx = map(random(), 0, 1, -1, 1) / 10; // map from (0 to 1) to (-1 to 1)
+          point.ny = map(random(), 0, 1, -1, 1) / 10; // map from (0 to 1) to (-1 to 1)
         } else if (noiseType === '1d') {
           // translate to two different spots in the noise field so nx and ny aren't similar
-          point.nx = getNoise(res, cols, rows, j, 0, noise, i * 100);
-          point.ny = getNoise(res, cols, rows, j, 0, noise, i * -100);
-        } else {
+          point.nx = this.getNoise(res, cols, rows, j, 0, noise, i * 100);
+          point.ny = this.getNoise(res, cols, rows, j, 0, noise, i * -100);
+        } else { // default to 2d noise
           // translate to two different spots in the noise field so nx and ny aren't similar
-          point.nx = getNoise(res, cols, rows, j, i, noise, 100);
-          point.ny = getNoise(res, cols, rows, j, i, noise, -100);
+          point.nx = this.getNoise(res, cols, rows, j, i, noise, 100);
+          point.ny = this.getNoise(res, cols, rows, j, i, noise, -100);
         }
         // use same value for both x and y noise radii
         point.cx = point.x + point.nx * intensity * radii;
@@ -119,32 +131,32 @@ import { map } from './math.js';
     return points;
   }
 
-  function draw (w, h, ctx, points, lineWidth, color, type, tension) {
+  draw (w, h, ctx, points, lineWidth, color, type, tension) {
     ctx.clearRect(0, 0, w, h);
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
     const types = type.split('|');
     if (types.includes('grid')) {
-      drawGrid(ctx, points, lineWidth, color, 'grid');
+      this.drawGrid(ctx, points, lineWidth, color, 'grid');
     }
     if (types.includes('noise')) {
-      drawGrid(ctx, points, lineWidth, color, 'noise')
+      this.drawGrid(ctx, points, lineWidth, color, 'noise')
     }
     if (types.includes('lines-grid')) {
-      drawLines(ctx, points, lineWidth, color, 'grid');
+      this.drawLines(ctx, points, lineWidth, color, 'grid');
     }
     if (types.includes('lines')) {
-      drawLines(ctx, points, lineWidth, color, 'noise');
+      this.drawLines(ctx, points, lineWidth, color, 'noise');
     }
     if (types.includes('flow')) {
-      drawFlow(ctx, points, lineWidth, color);
+      this.drawFlow(ctx, points, lineWidth, color);
     }
     if (types.includes('splines')) {
-      drawSplines(ctx, points, lineWidth, color, tension);
+      this.drawSplines(ctx, points, lineWidth, color, tension);
     }
   }
 
-  function drawGrid (ctx, points, lineWidth, color, target) {
+  drawGrid (ctx, points, lineWidth, color, target) {
     ctx.strokeStyle = color;
     ctx.lineWidth = (target === 'grid') ? lineWidth * 2 : lineWidth * 3;
     const radius = (target === 'grid') ? lineWidth * 4 : lineWidth * 6;
@@ -161,7 +173,7 @@ import { map } from './math.js';
     }
   }
 
-  function drawFlow (ctx, points, lineWidth, color) {
+  drawFlow (ctx, points, lineWidth, color) {
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
     for (let i = 0; i < points.length; i++) {
@@ -177,7 +189,7 @@ import { map } from './math.js';
     }
   }
 
-  function drawLines (ctx, points, lineWidth, color, target) {
+  drawLines (ctx, points, lineWidth, color, target) {
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth * 2;
     const [ x, y ] = (target === 'grid') ? [ 'x', 'y' ] : [ 'cx', 'cy' ];
@@ -194,7 +206,7 @@ import { map } from './math.js';
     }
   }
 
-  function drawSplines (ctx, points, lineWidth, color, tension) {
+  drawSplines (ctx, points, lineWidth, color, tension) {
     for (let j = 0; j < points.length; j++) {
       const row = points[j];
       ctx.strokeStyle = color;
@@ -230,9 +242,11 @@ import { map } from './math.js';
     }
   }
 
-  function getNoise (res, cols, rows, x, y, noise, translate) {
+  getNoise (res, cols, rows, x, y, noise, translate) {
+    // no noise function defined
+    if (!noise) return Math.random() * 2 - 1; // value between -1 and 1
     // noise resolution, based on grid dimensions
     return noise.perlin2((x + translate / cols) / res, (y + translate / rows) / res);
   }
 
-})();
+});
