@@ -62,7 +62,7 @@ customElements.define('hero-image', class extends HTMLElement {
     const rows = 18;
     const cols = rows * 2;
     // width is double the parent element, or if that's not available, something very big
-    const w = Math.round(this.parentElement.offsetWidth * (this.toPng ? 2 : 1) || cols * 60);
+    const w = Math.round(this.parentElement.offsetWidth * (this.toPng ? 2 : 1) || 2400);
     const h = Math.round(w / 3);
     const sizeX = w / cols;
     const sizeY = h / rows;
@@ -96,7 +96,7 @@ customElements.define('hero-image', class extends HTMLElement {
     const noise = (noiseType === '1d' || noiseType === '2d') ? new Noise(random()) : undefined;
 
     const paddingX = -sizeX * intensity / 1;
-    const paddingY = 0;
+    const paddingY = (h - (w / 3)) / 2;
     const radii = Math.max(sizeX, sizeY); // larger of these determines how far point can move
 
     const points = [];

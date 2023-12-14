@@ -8,6 +8,7 @@ pagination:
 permalink: /tags/{{ tag }}/
 eleventyComputed:
   title: "{{ tag | processTag: collections.categories }}"
+  desc: "Entries with the \"{{ tag }}\" tag"
 ---
 
 {% assign list = collections[tag] | reverse -%}

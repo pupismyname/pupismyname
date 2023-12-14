@@ -2,6 +2,7 @@ const { DateTime } = require('luxon');
 const eleventyNavigation = require('@11ty/eleventy-navigation');
 const eleventyPluginRss = require('@11ty/eleventy-plugin-rss');
 const eleventyFriendlyImages = require('./lib/eleventy-friendly-images');
+const eleventyGenerateHeroes = require('./lib/eleventy-generate-heroes');
 
 module.exports = ((eleventyConfig) => {
 
@@ -13,7 +14,11 @@ module.exports = ((eleventyConfig) => {
 
   eleventyConfig.addPlugin(eleventyNavigation);
   eleventyConfig.addPlugin(eleventyPluginRss);
-  eleventyConfig.addPlugin(eleventyFriendlyImages, { selector: '.content img' });
+  eleventyConfig.addPlugin(eleventyFriendlyImages, {
+    selector: '.content img',
+    lazy: false,
+  });
+  eleventyConfig.addPlugin(eleventyGenerateHeroes);
 
   eleventyConfig.addPassthroughCopy({ 'assets': '/s' });
   // copy any images and styles that go along with content

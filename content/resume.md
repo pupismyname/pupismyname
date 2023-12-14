@@ -1,7 +1,8 @@
 ---
 layout: layout-basic.liquid
 eleventyExcludeFromCollections: true
-title: John Brooks
+title: Resume
+desc: About me and the work I've done
 ---
 
 # John Brooks
