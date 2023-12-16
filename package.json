@@ -30,23 +30,25 @@
     "build:js": "node -e 'require(\"./lib/build-javascript.js\")();'",
     "build:prep": "npm run clean; npm run build:css; npm run build:js",
     "clean": "rm -r _site",
-    "dev": "npm run build:prep; concurrently --kill-others-on-fail \"npm run watch\" \"npx @11ty/eleventy --serve --incremental\"",
-    "watch": "npm-watch"
+    "dev": "npm run build:prep; concurrently --kill-others-on-fail \"npm run watch\" \"npm run dev:server\"",
+    "dev:server": "npx @11ty/eleventy --serve --incremental",
+    "watch": "concurrently --kill-others-on-fail \"npm run watch:js\" \"npm run watch:css\"",
+    "watch:css": "nodemon --watch styles --ext \"css\" --exec \"npm run build:css\"",
+    "watch:js": "nodemon --watch js --exec \"npm run build:js\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "npm-watch": "^0.11.0"
+    "nodemon": "^3.0.2"
   },
   "dependencies": {
     "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-fetch": "^4.0.0",
-    "@11ty/eleventy-navigation": "^0.3.5",
     "@11ty/eleventy-plugin-rss": "^1.2.0",
     "canvas": "^2.11.2",
     "cheerio": "^1.0.0-rc.12",
-    "cssnano": "^6.0.1",
+    "cssnano": "^6.0.2",
     "esbuild": "^0.19.9",
     "luxon": "^3.4.4",
     "noisejs": "^2.1.0",

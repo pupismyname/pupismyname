@@ -165,12 +165,11 @@ customElements.define('hero-image', class extends HTMLElement {
       const row = points[i];
       for (let j = 0; j < row.length; j++) {
         const point = row[j];
-        ctx.beginPath();
+        ctx.moveTo(point[x] + radius, point[y]);
         ctx.arc(point[x], point[y], radius, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.closePath();
       }
     }
+    ctx.stroke();
   }
 
   drawFlow (ctx, points, lineWidth, color) {
@@ -179,14 +178,12 @@ customElements.define('hero-image', class extends HTMLElement {
     for (let i = 0; i < points.length; i++) {
       const row = points[i];
       for (let j = 1; j < row.length; j++) {
-        ctx.beginPath();
         const point = row[j];
         ctx.moveTo(point.x, point.y);
         ctx.lineTo(point.cx, point.cy);
-        ctx.stroke();
-        ctx.closePath();
       }
     }
+    ctx.stroke();
   }
 
   drawLines (ctx, points, lineWidth, color, target) {
@@ -202,15 +199,14 @@ customElements.define('hero-image', class extends HTMLElement {
         ctx.lineTo(point[x], point[y]);
       }
       ctx.stroke();
-      ctx.closePath();
     }
   }
 
   drawSplines (ctx, points, lineWidth, color, tension) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineWidth * 2;
     for (let j = 0; j < points.length; j++) {
       const row = points[j];
-      ctx.strokeStyle = color;
-      ctx.lineWidth = lineWidth * 2;
       // catmull-rom splines adapted from https://codepen.io/osublake/pen/BowJed
       // row contains points with x and y coordinates (cx and cy)
       // this function expects an 1d array with x and y in series
@@ -220,7 +216,6 @@ customElements.define('hero-image', class extends HTMLElement {
       });
       const size = data.length;
       const last = size - 4;
-      ctx.beginPath();
       ctx.moveTo(data[0], data[1]);
       for (let i = 0; i < size - 2; i +=2) {
         const x0 = i ? data[i - 2] : data[0];
@@ -237,9 +232,8 @@ customElements.define('hero-image', class extends HTMLElement {
         const cp2y = y2 - (y3 - y1) / 6 * tension;
         ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x2, y2);
       }
-      ctx.stroke();
-      ctx.closePath();
     }
+    ctx.stroke();
   }
 
   getNoise (res, cols, rows, x, y, noise, translate) {

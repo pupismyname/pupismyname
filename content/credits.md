@@ -2,9 +2,6 @@
 layout: layout-content.liquid
 title: Credits
 desc: Links to things I used to build this site.
-eleventyNavigation:
-  key: Credits
-  order: 3
 ---
 
 ## Fonts
