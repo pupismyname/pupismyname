@@ -12,7 +12,7 @@ layout: layout-full.liquid
   </div>
   {% if desc -%}
     <h2 class="title-desc">{{ desc }}</h2>
-  {% endif -%}
+  {%- endif %}
   {% include "content-meta.liquid" -%}
 </div>
 {% if category -%}
@@ -27,8 +27,8 @@ layout: layout-full.liquid
     <p>Choose one and copy/paste into your front matter. It's already in UTC.</p>
     <h1>!!! Don't forget the metadata date !!!</h1>
     <hr>
-  {% endunless -%}
-{% endif -%}
+  {%- endunless %}
+{%- endif %}
 <div class="content">
   {{ content }}
 </div>
@@ -38,4 +38,4 @@ layout: layout-full.liquid
   {% include "next-prev.liquid", coll: collections[category], currentPage: page -%}
 {% else -%}
   <p>Find more in the <a href="/archive/">Archive</a></p>
-{% endif -%}
+{%- endif %}

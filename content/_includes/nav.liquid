@@ -5,6 +5,13 @@
     <li><a href="/showcase/">Showcase</a></li>
     <li><a href="/credits/">Credits</a></li>
     <li><a href="/resume/">Resume</a></li>
-    <li>{% include "atom-link.liquid" %}</li>
+    <li>
+      <a href="/feed.xml">
+        Subscribe
+        <span class="svg-icon" title="Atom feed">
+          {% svg 'assets/img/feed.svg' -%}
+        </span>
+      </a>
+    </li>
   </ul>
 </nav>

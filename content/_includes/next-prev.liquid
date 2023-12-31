@@ -6,7 +6,7 @@
       <li class="next-prev-control-prev">
         {% if previousPost -%}
           <a href="{{ previousPost.url | url }}" class="next-prev-control-link">
-        {% endif -%}
+        {%- endif %}
         <span class="next-prev-control-text">&larr; Older</span>
         <br>
         {% if previousPost -%}
@@ -15,15 +15,15 @@
           <span class="next-prev-control-category">{{ previousPost.data.category.singular }}</span>
         {% else -%}
           <span class="next-prev-control-empty">Nothing older</span>
-        {% endif -%}
+        {%- endif %}
         {% if previousPost -%}
           </a>
-        {% endif -%}
+        {%- endif %}
       </li>
       <li class="next-prev-control-next">
         {% if nextPost -%}
           <a href="{{ nextPost.url | url }}" class="next-prev-control-link">
-        {% endif -%}
+        {%- endif %}
         <span class="next-prev-control-text">Newer &rarr;</span>
         <br>
         {% if nextPost -%}
@@ -32,10 +32,10 @@
           <span class="next-prev-control-category">{{ nextPost.data.category.singular }}</span>
         {% else -%}
           <span class="next-prev-control-empty">Nothing newer</span>
-        {% endif -%}
+        {%- endif %}
         {% if nextPost -%}
           </a>
-        {% endif -%}
+        {%- endif %}
       </li>
     </ul>
   </div>

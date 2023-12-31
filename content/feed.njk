@@ -35,5 +35,5 @@
     <id>{{ absolutePostUrl }}</id>
     <content xml:lang="{{ metadata.language }}" type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
   </entry>
-  {% endfor -%}
+  {%- endfor %}
 </feed>

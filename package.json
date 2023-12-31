@@ -31,7 +31,7 @@
     "build:prep": "npm run clean; npm run build:css; npm run build:js",
     "clean": "rm -r _site",
     "dev": "npm run build:prep; concurrently --kill-others-on-fail \"npm run watch\" \"npm run dev:server\"",
-    "dev:server": "npx @11ty/eleventy --serve --incremental",
+    "dev:server": "ENV=development npx @11ty/eleventy --serve --incremental",
     "watch": "concurrently --kill-others-on-fail \"npm run watch:js\" \"npm run watch:css\"",
     "watch:css": "nodemon --watch styles --ext \"css\" --exec \"npm run build:css\"",
     "watch:js": "nodemon --watch js --exec \"npm run build:js\""
@@ -54,6 +54,7 @@
     "noisejs": "^2.1.0",
     "postcss": "^8.4.32",
     "postcss-import": "^15.1.0",
+    "prettier": "^3.1.1",
     "seedrandom": "^3.0.5",
     "sharp": "^0.33.0"
   }

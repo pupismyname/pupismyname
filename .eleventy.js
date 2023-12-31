@@ -3,6 +3,7 @@ const eleventyPluginRss = require('@11ty/eleventy-plugin-rss');
 const eleventyFriendlyImages = require('./lib/eleventy-friendly-images');
 const eleventyGenerateHeroes = require('./lib/eleventy-generate-heroes');
 const eleventyInjectSvg = require('./lib/eleventy-inject-svg');
+// const eleventyPrettifyHtml = require('./lib/eleventy-prettify-html');
 
 module.exports = ((eleventyConfig) => {
 
@@ -13,13 +14,10 @@ module.exports = ((eleventyConfig) => {
   });
 
   eleventyConfig.addPlugin(eleventyPluginRss);
-  eleventyConfig.addPlugin(eleventyFriendlyImages, {
-    selector: '.content img',
-    lazy: false,
-  });
+  eleventyConfig.addPlugin(eleventyFriendlyImages, { selector: '.content img', lazy: false, });
   eleventyConfig.addPlugin(eleventyGenerateHeroes);
-
   eleventyConfig.addPlugin(eleventyInjectSvg);
+  // eleventyConfig.addPlugin(eleventyPrettifyHtml);
 
   eleventyConfig.addPassthroughCopy({ 'assets': '/s' });
   // copy any images and styles that go along with content
