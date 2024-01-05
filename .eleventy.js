@@ -1,5 +1,6 @@
 const { DateTime } = require('luxon');
 const eleventyPluginRss = require('@11ty/eleventy-plugin-rss');
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const eleventyFriendlyImages = require('./lib/eleventy-friendly-images');
 const eleventyGenerateHeroes = require('./lib/eleventy-generate-heroes');
 const eleventyInjectSvg = require('./lib/eleventy-inject-svg');
@@ -14,6 +15,7 @@ module.exports = ((eleventyConfig) => {
   });
 
   eleventyConfig.addPlugin(eleventyPluginRss);
+  eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPlugin(eleventyFriendlyImages, { selector: '.content img', lazy: false, });
   eleventyConfig.addPlugin(eleventyGenerateHeroes);
   eleventyConfig.addPlugin(eleventyInjectSvg);

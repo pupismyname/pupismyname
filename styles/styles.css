@@ -175,6 +175,14 @@ code {
   font-family: var(--f-code);
 }
 
+pre > code {
+  display: block;
+}
+
+mark {
+  color: var(--c-text-dark);
+}
+
 :where(a) :is(code, pre) {
   color: var(--c-link);
 }
@@ -302,13 +310,9 @@ hr {
   background: var(--c-border);
   height: var(--v-border);
   border: none;
-  margin: 1em 0;
+  margin: 2em 0;
   padding: 0;
   /* display: none; */
-}
-
-:where(.title) hr {
-  margin: 2em 0;
 }
 
 .layout-basic {
@@ -554,7 +558,8 @@ img, svg, canvas {
   fill: currentColor;
   height: 1.2em;
   aspect-ratio: 1 / 1;
-  vertical-align: text-top;}
+  vertical-align: text-top;
+}
 
 @media print {
   :root {
@@ -597,4 +602,105 @@ img, svg, canvas {
   .grid-main     { order: 2; }
   .grid-sidebar  { order: 3; }
   .grid-footer   { order: 4; }
+}
+
+/* syntax highlighting theme */
+/* based on okaidia theme for JavaScript, CSS and HTML */
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--c-mix-40);
+}
+
+.token.punctuation {
+  color: var(--c-mix-60);
+}
+
+.token.namespace {
+  opacity: 0.5;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--c-mix-80);
+}
+
+.token.boolean,
+.token.number {
+  color: var(--c-mix-100);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--c-mix-100);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: var(--c-mix-60);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+  color: var(--c-mix-80);
+}
+
+.token.keyword {
+  color: var(--c-mix-60);
+}
+
+.token.regex,
+.token.important {
+  color: var(--c-mix-50);
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.deleted {
+  background-color: var(--c-mix-0);
+}
+
+.token.inserted-sign,
+.token.deleted-sign {
+  margin-left: -1ch;
+  display: block;
+}
+
+.token.inserted,
+.highlight-line-active {
+  background-color: var(--c-mix-10);
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+  opacity: 0.3;
 }

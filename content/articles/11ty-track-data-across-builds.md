@@ -13,7 +13,7 @@ When developing an [11ty](https://www.11ty.dev/) site using `--serve`, you might
 In this example, I'm tracking the number of builds and tracking whether or not a watch process is running.
 
 ### `.eleventy.js`
-```
+```js
 module.exports = function (eleventyConfig) {
 
   // this object is outside `addGlobalData`
@@ -60,7 +60,7 @@ This is build number {{ '{{ buildData.builds }}' }}.
 You can also use this data in javascript templates.
 
 ### `build-styles.11ty.js`
-```
+```js
 const fs = require('fs');
 
 module.exports = class {

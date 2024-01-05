@@ -29,7 +29,7 @@ The first step is to use [EleventyFetch](https://www.11ty.dev/docs/plugins/fetch
 
 If a fetch request fails, simply trying again later will usually work just fine. To accomplish this, I wrote a wrapper function for EleventyFetch that will catch any failed requests and queue them up again. Drop this in your project somewhere, and replace any calls to `EleventyFetch` with `fetchRetry`. Any failed requests will be noted in the console and placed at the end of the queue. If it fails 5 times, it will throw an error.
 
-```
+```js
 async function fetchRetry (url, EleventyFetchOptions, attempts = 1) {
   const maxAttempts = 5;
   try {

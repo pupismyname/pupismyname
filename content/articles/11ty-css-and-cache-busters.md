@@ -65,7 +65,7 @@ This only affects the development process running on 11ty dev server. In product
   ```
 
 - `lib/process-styles.js` builds the final CSS and sourcemap and moves the files to the 11ty output folder.
-  ```
+  ```js
   const fs = require('fs');
   const path = require('path');
   const postcss = require('postcss');
@@ -106,7 +106,7 @@ This only affects the development process running on 11ty dev server. In product
 
 - `package.json` contains the `build:css` and `watch:css` npm scripts, as well as the `npm-watch` config. Your root stylesheet will be `styles/styles.css`. If you want to change this, update the `watch` below and update the path in `process-styles.js` above.
 
-  ```
+  ```json
   …
   "watch": {
     "build:css": {
@@ -128,7 +128,7 @@ This only affects the development process running on 11ty dev server. In product
 
 - `_data/cacheBusters.js` goes in your 11ty `_data` folder and creates a `cacheBusters` object for your templates.
 
-  ```
+  ```js
   const getHash = require('../../lib/get-hash');
 
   // Generate hashes for assets to use for cache busting
@@ -141,7 +141,7 @@ This only affects the development process running on 11ty dev server. In product
   ```
 
 - `lib/get-hash.js` is used by `cacheBusters.js` and returns a hash key based on a string or a file for use by the cache buster.
-  ```
+  ```js
   const crypto = require('crypto');
   const fs = require('fs');
   const path = require('path');
@@ -182,14 +182,14 @@ This only affects the development process running on 11ty dev server. In product
 - With all of the above in place, you can use the `cacheBusters` values in templates as a querystring parameter when referencing an asset.
 
   {% assign linkrel = '<link rel="stylesheet" href="/s/styles/styles.min.css?v={{ cacheBusters.styles }}">' -%}
-  ```
+  ```html
   {{ linkrel }}
   ```
   This can be expanded to work for any asset. Styles, scripts, images, whatever.
 
 - Add a watch target to the server config in `.eleventy.js` so it will reload the browser when `postcss` updates the stylesheet:
 
-  ```
+  ```js
     eleventyConfig.setServerOptions({
       watch: ['_site/s/**/*'],
     });

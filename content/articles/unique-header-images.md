@@ -296,3 +296,9 @@ Again, here's the same example, but with a visible gradient.
 There's so much customization and variation that could go into this concept, it was difficult to know where to stop. Feel free to take [the code](https://github.com/pupismyname/pupismyname/blob/main/js/hero.js) and run with it. Let me know if you make something cool.
 
 <script src="/s/js/hero.js?v={{ cacheBusters['js/hero'] }}"></script>
+
+---
+
+### Update
+
+After this article was written, the code was adapted to render the image at build time rather than on the client. For more information, see [the follow-up article](/articles/11ty-og-images).
