@@ -174,11 +174,13 @@ Of course, `sharp` isn't the only way to compress images. If you prefer another 
 
 That's enough progress to show off. Here's the optimized OG image for this article. Beautiful.
 
-[![Open Graph image for this article](./og.png)](./og.png)
+<!-- the image might not exist for friendly image plugin, so manually specify width and height -->
+[<img alt="Open Graph image for this article" src="./og.png" width="2400" height="800">](./og.png)
 
 Here's the OG image for the homepage. Gorgeous.
 
-[![Open Graph image for this article](/og.png)](/og.png)
+<!-- the image might not exist for friendly image plugin, so manually specify width and height -->
+[<img alt="Open Graph image for the homepage" src="/og.png" width="2400" height="800">](/og.png)
 
 ## Add Open Graph information to the document head
 
@@ -338,7 +340,8 @@ Compare it to the original web component that draws the image with client-side `
 
 And here's the OG image for comparison. You can see the OG image has a different aspect ratio than the hero image, and its background is a solid color, but the pattern is still the same since it uses the same random seed.
 
-[![Open Graph image for this article](./og.png)](./og.png)
+<!-- the image might not exist for friendly image plugin, so manually specify width and height -->
+[<img alt="Open Graph image for this article" src="./og.png" width="2400" height="800">](./og.png)
 
 ## Adding hero image to the page
 
