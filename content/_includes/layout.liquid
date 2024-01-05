@@ -12,7 +12,11 @@ layoutType: content
   <link rel="stylesheet" href="/s/styles/styles.min.css?v={{ cacheBusters['styles'] }}">
 
   <title>{{ title | strip_html }} | John Brooks</title>
-  <meta property="og:title" content="John Brooks | {{ title | strip_html | escape }}">
+  {% if desc -%}
+    <meta name="description" content="{{ desc | strip_html | escape }}">
+  {%- endif %}
+
+  <meta property="og:title" content="{{ title | strip_html | escape }} | John Brooks">
   {% if desc -%}
     <meta property="og:description" content="{{ desc | strip_html | escape }}">
   {%- endif %}
