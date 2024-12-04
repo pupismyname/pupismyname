@@ -7,7 +7,7 @@ pagination:
   alias: tag
 permalink: /tags/{{ tag }}/
 eleventyComputed:
-  title: "{{ tag | processTag: collections.categories }}"
+  title: "Regarding <em>{{ tag }}</em>"
   desc: "Entries with the \"{{ tag }}\" tag"
 ---
 

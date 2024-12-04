@@ -8,11 +8,11 @@ layout: layout-full.liquid
     <img class="hero-image" src="./hero.png" alt="">
     <div class="hero-contents">
       <h1 class="title-title">{{ title }}</h1>
+      {% if desc -%}
+        <h2 class="title-desc">{{ desc }}</h2>
+      {%- endif %}
     </div>
   </div>
-  {% if desc -%}
-    <h2 class="title-desc">{{ desc }}</h2>
-  {%- endif %}
   {% include "content-meta.liquid" -%}
 </div>
 {% if category -%}
@@ -37,5 +37,9 @@ layout: layout-full.liquid
 {% if category -%}
   {% include "next-prev.liquid", coll: collections[category], currentPage: page -%}
 {% else -%}
-  <p>Find more in the <a href="/archive/">Archive</a></p>
+  {% if isArchive -%}
+    <p>You've reached the end of the archive.</p>
+  {%- else %}
+    <p>Find more in the <a href="/archive/">Archive</a></p>
+  {%- endif %}
 {%- endif %}

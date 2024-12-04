@@ -6,24 +6,6 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "watch": {
-    "build:js": {
-      "patterns": [
-        "js"
-      ],
-      "extensions": "js",
-      "quiet": false,
-      "runOnChangeOnly": false
-    },
-    "build:css": {
-      "patterns": [
-        "styles"
-      ],
-      "extensions": "css",
-      "quiet": false,
-      "runOnChangeOnly": false
-    }
-  },
   "scripts": {
     "build": "npm run build:prep; npx @11ty/eleventy",
     "build:css": "node -e 'require(\"./lib/build-styles.js\")();'",
@@ -42,23 +24,24 @@
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
-    "concurrently": "^8.2.2",
+    "concurrently": "^9.1.0",
     "nodemon": "^3.0.2"
   },
   "dependencies": {
-    "@11ty/eleventy": "^2.0.1",
-    "@11ty/eleventy-fetch": "^4.0.0",
-    "@11ty/eleventy-plugin-rss": "^1.2.0",
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-fetch": "^5.0.1",
+    "@11ty/eleventy-plugin-rss": "^2.0.2",
+    "@11ty/eleventy-upgrade-help": "^3.0.1",
     "canvas": "^2.11.2",
-    "cheerio": "^1.0.0-rc.12",
-    "cssnano": "^6.0.2",
-    "esbuild": "^0.19.9",
+    "cheerio": "^1.0.0",
+    "cssnano": "^7.0.6",
+    "esbuild": "^0.24.0",
     "luxon": "^3.4.4",
     "noisejs": "^2.1.0",
     "postcss": "^8.4.32",
-    "postcss-import": "^15.1.0",
+    "postcss-import": "^16.1.0",
     "prettier": "^3.1.1",
     "seedrandom": "^3.0.5",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.5"
   }
 }

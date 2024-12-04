@@ -40,7 +40,7 @@ layoutType: content
   <meta name="generator" content="{{ eleventy.generator }}">
 
 </head>
-<body class="layout-type-{{ layoutType }}">
+<body class="layout-type-{{ layoutType }} {%- echo bodyClass %}">
 
   <div class="container">
     {{ content }}

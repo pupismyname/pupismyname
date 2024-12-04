@@ -329,7 +329,8 @@ The above example is simplified compared to the final code, but the general appr
 
 And here's the new hero image. Lovely.
 
-[![The hero image for this article](./hero.png)](./hero.png)
+<!-- the image might not exist for friendly image plugin, so manually specify width and height -->
+[<img alt="The hero image for this article" src="./hero.png" width="1200" height="630">](./hero.png)
 
 Compare it to the original web component that draws the image with client-side `canvas`. The two should look identical.
 

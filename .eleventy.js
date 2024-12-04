@@ -31,9 +31,6 @@ module.exports = ((eleventyConfig) => {
   eleventyConfig.addPassthroughCopy('content/**/*.css');
   eleventyConfig.addPassthroughCopy('content/**/*.js');
 
-  // tags we want to filter out of tag pages and tag listings
-  const filter = [ 'all', 'content', 'categories', 'filteredTags', 'articles', 'showcase' ];
-
   // generate a collection of categories, used to create category pages like /articles
   eleventyConfig.addCollection('categories', (collectionApi) => {
     // get all content
@@ -60,23 +57,12 @@ module.exports = ((eleventyConfig) => {
     const content = collectionApi.getFilteredByTag('content');
     const names = [];
     // loop through content
-    const tags = content.map((item) => {
-      return item.data.tags;
-    }).flat().filter((tag) => {
-      // ignore duplicate categories
-      if (!names.includes(tag)) {
-        names.push(tag);
-        return true;
-      }
-      return false;
-    }).filter((tag) => {
-      return !filter.includes(tag);
-    }).sort((a, b) => {
-      if (a < b) return -1;
-      if (a > b) return 1;
-      return 0;
-    });
-    return tags;
+    const allTags = content.map((item) => item.data.tags);
+    const flattenedTags = allTags.flat();
+    const uniqueTags = Array.from(new Set(flattenedTags));
+    const filteredTags = filterTags(uniqueTags);
+    const sortedTags = filteredTags.sort();
+    return sortedTags;
   });
 
   // convert UTC date to something like `March 25, 2023, 5:56 PM CDT`
@@ -86,25 +72,11 @@ module.exports = ((eleventyConfig) => {
     return dt.setLocale('en-US').toLocaleString(DateTime.DATETIME_FULL);
   });
 
-  // transform tag to a more display-appropriate format
-  eleventyConfig.addFilter('processTag', (tag, categories) => {
-    // special handling of the 'all' tag
-    if (tag === 'all') return 'Archive';
-    // don't add "Regarding" to category names
-    const isCategory = categories.some((category) => {
-      return category.name === tag;
-    });
-    if (isCategory) {
-      return capitalize(tag);
-    }
-    return `Regarding <em>${capitalize(tag)}</em>`;
-  });
-
-  // transform tag to a more display-appropriate format
+  // remove tags we don't want to display
   eleventyConfig.addFilter('filterTags', (tags) => {
     if (!tags) return;
     tags = (tags.length) ? tags : Object.keys(tags);
-    return tags.filter((tag) => !filter.includes(tag));
+    return filterTags(tags);
   });
 
   function capitalize (word) {
@@ -114,6 +86,12 @@ module.exports = ((eleventyConfig) => {
     } else {
       return word.charAt(0).toUpperCase() + word.slice(1);
     }
+  }
+
+  function filterTags (tags) {
+    // tags we want to filter out of tag pages and tag listings
+    const filteredTagList = [ 'content', 'articles', 'showcase' ];
+    return tags.filter((tag) => !filteredTagList.includes(tag));
   }
 
   return {

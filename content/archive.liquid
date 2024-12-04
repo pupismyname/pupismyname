@@ -3,6 +3,7 @@ layout: layout-content.liquid
 excludeFromCollections: true
 title: Archive
 desc: All the entries on the site.
+isArchive: true
 ---
 {% assign list = collections.content | reverse -%}
 {% include "list-content.liquid", list: list -%}
