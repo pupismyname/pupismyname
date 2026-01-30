@@ -31,17 +31,16 @@
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-fetch": "^5.0.1",
     "@11ty/eleventy-plugin-rss": "^2.0.2",
-    "@11ty/eleventy-upgrade-help": "^3.0.1",
-    "canvas": "^2.11.2",
+    "canvas": "^3.2.1",
     "cheerio": "^1.0.0",
     "cssnano": "^7.0.6",
-    "esbuild": "^0.24.0",
+    "esbuild": "^0.27.2",
     "luxon": "^3.4.4",
     "noisejs": "^2.1.0",
     "postcss": "^8.4.32",
     "postcss-import": "^16.1.0",
     "prettier": "^3.1.1",
     "seedrandom": "^3.0.5",
-    "sharp": "^0.33.5"
+    "sharp": "^0.34.5"
   }
 }
