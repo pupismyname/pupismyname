@@ -16,7 +16,7 @@ If you're curious about the math and code that draws the images, check out [the 
 
 Social media apps usually look in the document head for an Open Graph (OG) image when sharing a link. This image can be anything you want as long as it satisfies [certain criteria for filesize and dimensions](https://developers.facebook.com/docs/sharing/webmasters/images/). Here's an example of what I'm trying to produce.
 
-![Social sharing preview](./ivory-preview.jpg)
+![Social sharing preview](/s/media/ivory-preview.jpg)
 
 For link preview to look like this, you need to add a few tags to the document `head` that point to an image and describe the page. My goal is to automate the process as much as possible. I already have code that uses client-side javascript to [draw the hero image behind the page header](/articles/unique-header-images/). The same code could be adapted to draw an image on the server at build time for use as the OG image.
 

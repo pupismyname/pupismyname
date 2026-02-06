@@ -45,6 +45,9 @@ content:
     type: collection
     fields:
       - component: content
+      - name: height
+        label: Height
+        type: number
   - name: pages
     label: Pages
     path: content

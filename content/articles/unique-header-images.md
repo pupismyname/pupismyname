@@ -49,7 +49,7 @@ To give the grid some personality, each point's `x` and `y` position is randomly
 
 Using a noise function instead of `Math.random()` will turn this nonsense into something appoaching order. A [Perlin noise](https://en.wikipedia.org/wiki/Perlin_noise) algorithm can generate a sequence of random numbers whose values are smoothed out instead of totally random. Noise can be one dimensional (a line), two dimensional (a grid), or three dimensional (a cube). Can noise go higher than three dimensions? I have no idea. Probably. Ask someone that knows math.
 
-To replace p5.js's noise function, I found a simple noise module on npm called [`noisejs`](https://www.npmjs.com/package/noisejs). It was last updated ten (10!) years ago, originally forked from [another codebase](https://github.com/josephg/noisejs) and modified to work with `import`. As an aside, `noisejs` doesn't really support one-dimensional noise, but it's easy to can fake it for demonstration purposes.
+To replace p5.js's noise function, I found a simple noise module on npm called [`noisejs`](https://www.npmjs.com/package/noisejs). It was last updated ten (10!) years ago, originally forked from [another codebase](https://github.com/josephg/noisejs) and modified to work with `import`. As an aside, `noisejs` doesn't really support one-dimensional noise, but it's easy to fake it for demonstration purposes.
 
 If you use a one-dimensional noise function for each line, it makes things nice and smooth, but you'll notice each line is independent from the lines around it. There's a nice flow horizontally, but not vertically.
 
@@ -79,7 +79,7 @@ If you use two-dimensional noise, you can smooth out the grid both horizontally 
 
 Things look pretty good now, but the lines are different every time the page loads. Try refreshing and you'll see the above image change. This happens because the noise function is initialized with `Math.random()`. If we initialize it with a static value every time, the lines will be the same every time. But that's not quite the goal either. We need a number to initialize the noise function that's unique for every page, but consistent across page loads.
 
-In `p5.js`, you can use `noiseSeed` to seed a random number generator. To replace this, there's a package called [`seedrandom`](https://github.com/davidbau/seedrandom). You can pass in a string to seed a random number generator, then call it as many times as you like. A given seed will always produce the same sequence of random numbers.
+In p5.js, you can use `noiseSeed` to seed a random number generator. To replace this, there's a package called [`seedrandom`](https://github.com/davidbau/seedrandom). You can pass in a string to seed a random number generator, then call it as many times as you like. A given seed will always produce the same sequence of random numbers.
 
 Since each page has a unique [permalink](https://www.11ty.dev/docs/permalinks/), using `window.location.pathname` as the seed value will give each page it's own unique number to initialize the two-dimensional noise function, which will yield noise values unique to each individual page.
 
