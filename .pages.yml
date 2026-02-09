@@ -3,25 +3,21 @@ media:
   output: /s/media
   categories: [ image, document, video, audio, compressed ]
 components:
-  - title:
-    label: Title
-    type: string
-  - desc:
-    label: Description
-    type: string
-  - body:
-    label: Body
-    type: rich-text
-content:
-  - name: pages
-    label: Pages
-    path: content
-    type: collection
+  - basic:
+    type: object
     fields:
       - name: title
-        component: title
+        label: Title
+        type: string
       - name: desc
-        component: desc
+        label: Description
+        type: string
+      - name: body
+        label: Body
+        type: rich-text
+  - content:
+    type: object
+    fields:
       - name: date
         label: Date
         type: date
@@ -35,6 +31,29 @@ content:
         type: string
         list:
           collapsible: false
-      - name: body
-        component: body
-
+      - component: basic
+content:
+  - name: articles
+    label: Articles
+    path: content/articles
+    type: collection
+    fields:
+      - name: content
+        component: content
+  - name: showcase
+    label: Showcase
+    path: content/showcase
+    type: collection
+    fields:
+      - name: content
+        component: content
+      - name: height
+        label: Height
+        type: number
+  - name: pages
+    label: Pages
+    path: content
+    type: collection
+    fields:
+      - name: basic
+        component: basic
