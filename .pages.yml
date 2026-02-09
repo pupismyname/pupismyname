@@ -9,3 +9,34 @@ content:
     type: collection
     fields:
       - component: content
+components:
+  - name: basic
+    type: object
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: desc
+        label: Description
+        type: string
+      - name: body
+        label: Body
+        type: rich-text
+  - name: content
+    type: object
+    fields:
+      - name: date
+        label: Date
+        type: date
+      - name: category
+        label: Category
+        type: string
+        list:
+          collapsible: false
+      - name: tags
+        label: Tags
+        type: string
+        list:
+          collapsible: false
+      - component: basic
+
