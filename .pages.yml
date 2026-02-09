@@ -3,57 +3,72 @@ media:
   output: /s/media
   categories: [ image, document, video, audio, compressed ]
 components:
-  - basic:
-    type: object
-    fields:
-      - name: title
-        label: Title
-        type: string
-      - name: desc
-        label: Description
-        type: string
-      - name: body
-        label: Body
-        type: rich-text
-  - content:
-    type: object
-    fields:
-      - name: date
-        label: Date
-        type: date
-      - name: category
-        label: Category
-        type: string
-        list:
-          collapsible: false
-      - name: tags
-        label: Tags
-        type: string
-        list:
-          collapsible: false
-      - component: basic
+  - title:
+    label: Title
+    type: string
+  - desc:
+    label: Description
+    type: string
+  - body:
+    label: Body
+    type: rich-text
+  - date:
+    label: Date
+    type: date
+  - category:
+    label: Category
+    type: string
+    list:
+      collapsible: false
+  - tags:
+    label: Tags
+    type: string
+    list:
+      collapsible: false
+  - height:
+    label: Height
+    type: number
 content:
   - name: articles
     label: Articles
     path: content/articles
     type: collection
     fields:
-      - name: content
-        component: content
+      - name: title
+        component: title
+      - name: desc
+        component: desc
+      - name: body
+        componet: body
+      - name: date
+        componet: date
+      - name: tags
+        componet: tags
   - name: showcase
     label: Showcase
     path: content/showcase
     type: collection
     fields:
-      - name: content
-        component: content
+      - name: title
+        component: title
+      - name: desc
+        component: desc
+      - name: body
+        componet: body
+      - name: date
+        componet: date
+      - name: tags
+        componet: tags
       - name: height
-        label: Height
-        type: number
+        component: height
   - name: pages
     label: Pages
     path: content
     type: collection
     fields:
-      - name: basic
-        component: basic
+      - name: title
+        component: title
+      - name: desc
+        component: desc
+      - name: body
+        componet: body
