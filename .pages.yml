@@ -2,11 +2,9 @@ media:
   input: assets/s/media
   output: /s/media
   categories: [ image, document, video, audio, compressed ]
-content:
-  - name: pages
-    label: Pages
-    path: content
-    type: collection
+components:
+  - name: basic
+    type: object
     fields:
       - name: title
         label: Title
@@ -17,6 +15,13 @@ content:
       - name: body
         label: Body
         type: rich-text
+content:
+  - name: pages
+    label: Pages
+    path: content
+    type: collection
+    fields:
+      - component: basic
       - name: date
         label: Date
         type: date
