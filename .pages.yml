@@ -8,11 +8,6 @@ content:
     path: content
     type: collection
     fields:
-      - component: content
-components:
-  - name: basic
-    type: object
-    fields:
       - name: title
         label: Title
         type: string
@@ -22,9 +17,6 @@ components:
       - name: body
         label: Body
         type: rich-text
-  - name: content
-    type: object
-    fields:
       - name: date
         label: Date
         type: date
@@ -38,5 +30,4 @@ components:
         type: string
         list:
           collapsible: false
-      - component: basic
 
