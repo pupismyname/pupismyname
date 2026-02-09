@@ -18,8 +18,10 @@ content:
     path: content
     type: collection
     fields:
-      - component: title
-      - component: desc
+      - name: title
+        component: title
+      - name: desc
+        component: desc
       - name: date
         label: Date
         type: date
@@ -33,5 +35,6 @@ content:
         type: string
         list:
           collapsible: false
-      - component: body
+      - name: body
+        component: body
 
