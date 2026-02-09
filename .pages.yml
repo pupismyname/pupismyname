@@ -2,3 +2,10 @@ media:
   input: assets/s/media
   output: /s/media
   categories: [ image, document, video, audio, compressed ]
+content:
+  - name: pages
+    label: Pages
+    path: content
+    type: collection
+    fields:
+      - component: content
