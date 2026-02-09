@@ -3,7 +3,8 @@ media:
   output: /s/media
   categories: [ image, document, video, audio, compressed ]
 components:
-  - name: basic
+  basic:
+    label: Basic fields
     type: object
     fields:
       - name: title
