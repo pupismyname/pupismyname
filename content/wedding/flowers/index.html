@@ -7,114 +7,159 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-<style>
+  <style>
 
-@media print {
-  *,
-  *:before,
-  *:after {
-    background: transparent;
-    color: #000;
-    box-shadow: none;
-    text-shadow: none;
-  }
+    @media print {
+      *,
+      *:before,
+      *:after {
+        background: transparent;
+        color: #000;
+        box-shadow: none;
+        text-shadow: none;
+      }
 
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
+      a,
+      a:visited {
+        text-decoration: underline;
+      }
 
-  a[href]:after {
-    content: " (" attr(href) ")";
-  }
+      a[href]:after {
+        content: " (" attr(href) ")";
+      }
 
-  abbr[title]:after {
-    content: " (" attr(title) ")";
-  }
+      abbr[title]:after {
+        content: " (" attr(title) ")";
+      }
 
-  a[href^="#"]:after,
-  a[href^="javascript:"]:after {
-    content: "";
-  }
-}
+      a[href^="#"]:after,
+      a[href^="javascript:"]:after {
+        content: "";
+      }
+    }
 
-:root {
-  --font-size-ratio: 1.4;
-  --line-height-ratio: 1.05;
-  --border-color: transparent;
-  --link-color: #cc66aa;
-  --body-color: #f9edf5;
-  --background-color: #ffffff;
-  --text-color: #333333;
-  --divider-color: #edc9e1;
-  --shadow-color: #cc66aa22;
-}
+    :root {
+      --font-size-ratio: 1.25;
+      --line-height-ratio: 1.05;
+      --border-color: #cc66aa44;
+      --body-color: #f9edf5;
+      --background-color: #fff;
+      --text-color: #333333;
+      --link-color: #cc66aa;
+      --divider-color: #cc66aa66;
+      --underline-color: #cc66aaaa;
+      --shadow-color: #cc66aa33;
+      font-size: 80%;
+    }
 
-html {
-  box-sizing: border-box;
-  font-size: 120%;
-  scroll-behavior: smooth;
-}
+    @media (min-width: 400px) {
+      :root {
+        font-size: 90%;
+      }
+    }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
+    @media (min-width: 600px) {
+      :root {
+        font-size: 100%;
+      }
+    }
 
-*, *::before, *::after {
-  box-sizing: inherit;
-}
+    @media (min-width: 800px) {
+      :root {
+        font-size: 110%;
+      }
+    }
 
-body {
-  background: var(--body-color);
-  color: var(--text-color);
-  font-family: "Ancizar Serif", serif;
-  line-height: 1.6;
-  margin: 1rem;
-  padding: 0;
-  max-width: 100%;
-  font-size: 1rem;
-}
+    @media (min-width: 1000px) {
+      :root {
+        font-size: 120%;
+      }
+    }
 
-a {
-  color: var(--link-color);
-}
+    html {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-body > div {
-  padding: 2rem;
-  max-width: 40rem;
-  background: var(--background-color);
-  margin: 2rem auto;
-  border-color: var(--border-color);
-  border-width: 0 1px;
-  border-style: solid;
-  border-radius: 1rem;
-  box-shadow: 0 0 2rem var(--shadow-color);
-}
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
 
-h1, h2, h3, h4, h5, h6,
-p, ul, ol {
-  margin-block: 1rem;
-}
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
 
-h1 { font-size: calc(1rem * pow(var(--font-size-ratio), 3)); line-height: calc(1 * pow(var(--line-height-ratio), 2)); }
-h2 { font-size: calc(1rem * pow(var(--font-size-ratio), 2.25)); line-height: calc(1 * pow(var(--line-height-ratio), 3.6)); }
-h3 { font-size: calc(1rem * pow(var(--font-size-ratio), 1.5)); line-height: calc(1 * pow(var(--line-height-ratio), 5.2)); }
-h4 { font-size: calc(1rem * pow(var(--font-size-ratio), 0.75)); line-height: calc(1 * pow(var(--line-height-ratio), 6.8)); }
-h5 { font-size: calc(1rem * pow(var(--font-size-ratio), 0)); line-height: calc(1 * pow(var(--line-height-ratio), 8.4)); }
-h6 { font-size: calc(1rem * pow(var(--font-size-ratio), -0.75)); line-height: calc(1 * pow(var(--line-height-ratio), 10)); }
+    body {
+      margin: 0;
+      padding: 0.5rem;
+      font-family: "Ancizar Serif", serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-color);
+      background: var(--body-color);
+    }
 
-[id] {
-  scroll-margin-top: 3rem;
-}
+    a {
+      color: var(--link-color);
+      text-decoration-color: var(--underline-color);
+    }
 
-hr {
-  height: 1px;
-  background: var(--divider-color);
-  border: none;
-  margin-block: 2rem;
-}
+    a:focus, a:hover {
+      text-decoration-color: var(--link-color);
+    }
+
+    body > div {
+      padding: 1rem 1.5rem;
+      margin: 2rem auto;
+      max-width: 37rem;
+      background: var(--background-color);
+      border-color: var(--border-color);
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 1rem;
+      box-shadow: 0 0 2rem var(--shadow-color);
+    }
+
+    body > div:first-child {
+      margin-block-start: 0;
+    }
+
+    body > div:last-child {
+      margin-block-end: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6,
+    p, ol, ul {
+      margin-block: 1rem;
+    }
+
+    ol, ul {
+      padding-inline-start: 1.5rem;
+    }
+
+    li {
+      margin-block: 0.25rem;
+    }
+
+    h1 { font-size: calc(1rem * pow(var(--font-size-ratio), 4)); line-height: 1.1; }
+    h2 { font-size: calc(1rem * pow(var(--font-size-ratio), 3)); line-height: 1.2; }
+    h3 { font-size: calc(1rem * pow(var(--font-size-ratio), 2)); line-height: 1.3; }
+    h4 { font-size: calc(1rem * pow(var(--font-size-ratio), 1)); line-height: 1.4; }
+    h5 { font-size: calc(1rem * pow(var(--font-size-ratio), 0)); line-height: 1.5; }
+    h6 { font-size: calc(1rem * pow(var(--font-size-ratio), -1)); line-height: 1.6; }
+
+    [id] {
+      scroll-margin-top: 3rem;
+    }
+
+    hr {
+      height: 1px;
+      background: var(--divider-color);
+      border: none;
+      margin-block: 2rem;
+    }
 
   </style>
 </head>
@@ -122,193 +167,178 @@ hr {
 
   <div>
 
-      <h1>We love Lego Flowers!</h1>
-      <p>We wanted to share our love of Lego with you. You should find a bag and a vase at your seat. Inside the bag is a Lego flower you can build.</p>
+    <h1>We love Lego Flowers!</h1>
+    <p>We wanted to share our love of Lego with you. You should find a bag and a vase at your seat. Inside the bag is a Lego flower you can build.</p>
 
-      <hr>
+    <hr>
 
-      <h2>How to</h2>
-      <ol>
-        <li>
-          <p><strong>Find your set on this page.</strong><br>Follow the link in the Table of Contents that matches the set number on the note in your bag.</p>
-        </li>
-        <li>
-          <p><strong>Find your flower in the list.</strong><br>Flowers are listed with a hint to help identify them. Follow the link to the individual instructions for your flower. This will open a PDF from the Lego website and scroll to the correct page.</p>
-        </li>
-        <li>
-          <p><strong>Build your flower!</strong><br>You can follow the instructions exactly, or you can make it your own.</p>
-        </li>
-        <li>
-          <p><strong>Put your flower in the tiny vase.</strong><br>It is yours to keep.</p>
-        </li>
-      </ol>
+    <h2>How to</h2>
+    <ol>
+      <li>
+        <p><strong>Find your set on this page.</strong><br>Follow the link in the Table of Contents that matches the set number on the note in your bag.</p>
+      </li>
+      <li>
+        <p><strong>Find your flower in the list.</strong><br>Flowers are listed with a hint to help identify them. Follow the link to the individual instructions for your flower. This will open a PDF from the Lego website and scroll to the correct page.</p>
+      </li>
+      <li>
+        <p><strong>Build your flower!</strong><br>You can follow the instructions exactly, or you can make it your own.</p>
+      </li>
+      <li>
+        <p><strong>Put your flower in the tiny vase.</strong><br>It is yours to keep.</p>
+      </li>
+    </ol>
 
-      <hr>
+    <hr>
 
-      <h2>Table of Contents</h2>
-      <ul>
-        <li><a href="#set-10342">10342 - Pretty Pink Flower Bouquet</a></li>
-        <li><a href="#set-10347">10347 - Petite Sunny Bouquet</a></li>
-        <li><a href="#set-11508">11508 - Daisies</a></li>
-        <li><a href="#set-11514">11514 - Cosmos Flowers</a></li>
-        <li><a href="#set-10280">10280 - Flower Bouquet</a></li>
-        <li><a href="#set-10313">10313 - Wildflower Bouquet</a></li>
-        <li><a href="#set-30701">30701 - Field Flowers</a></li>
-      </ul>
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#set-10342">10342 - Pretty Pink Flower Bouquet</a></li>
+      <li><a href="#set-10347">10347 - Petite Sunny Bouquet</a></li>
+      <li><a href="#set-11508">11508 - Daisies</a></li>
+      <li><a href="#set-11514">11514 - Cosmos Flowers</a></li>
+      <li><a href="#set-10280">10280 - Flower Bouquet</a></li>
+      <li><a href="#set-10313">10313 - Wildflower Bouquet</a></li>
+      <li><a href="#set-30701">30701 - Field Flowers</a></li>
+    </ul>
 
-    </div>
+  </div>
 
-    <div>
+  <div>
 
-      <h3 id="set-10342">10342 - <a target="_blank" href="https://www.lego.com/en-us/product/pretty-pink-flower-bouquet-10342">Pretty Pink Flower Bouquet</a> - 2025</h3>
-      <ul>
-        <li><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf">Instructions</a></li>
-        <li>
-          <h4>Individual Instructions</h4>
-          <ul>
-            <li>Page 9 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=9">Cornflower</a> (white egg shells)</li>
-            <li>Page 17 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=17">Eucalyptus 'baby blue'</a> (green discs)</li>
-            <li>Page 21 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=21">Elder</a> (tiny green grapes)</li>
-            <li>Page 33 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=33">Rose</a> (pink shells)</li>
-            <li>Page 39 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=39">Blue daisy</a> (light blue flowers)</li>
-            <li>Page 43 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=43">Canterbury bells</a> (white bells, green eggs)</li>
-            <li>Page 49 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=49">Persian buttercup</a> (orange axes)</li>
-            <li>Page 56 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=56">Waterlily dahlia</a> (pink shields)</li>
-            <li>Page 62 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=62">Boat orchid</a> (large pink leaves)</li>
-          </ul>
-        </li>
-      </ul>
+    <h3 id="set-10342">10342 - <a target="_blank" href="https://www.lego.com/en-us/product/pretty-pink-flower-bouquet-10342">Pretty Pink Flower Bouquet</a></h3>
+    <p><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf">Instructions</a></p>
+    <h4>Individual Instructions</h4>
+    <ul>
+      <li>Page 9 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=9">Cornflower</a> (white egg shells)</li>
+      <li>Page 17 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=17">Eucalyptus 'baby blue'</a> (green discs)</li>
+      <li>Page 21 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=21">Elder</a> (tiny green grapes)</li>
+      <li>Page 33 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=33">Rose</a> (pink shells)</li>
+      <li>Page 39 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=39">Blue daisy</a> (light blue flowers)</li>
+      <li>Page 43 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=43">Canterbury bells</a> (white bells, green eggs)</li>
+      <li>Page 49 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=49">Persian buttercup</a> (orange axes)</li>
+      <li>Page 56 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=56">Waterlily dahlia</a> (pink shields)</li>
+      <li>Page 62 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6590464.pdf#page=62">Boat orchid</a> (large pink leaves)</li>
+    </ul>
+  </li>
+</ul>
 
-    </div>
+</div>
 
-    <div>
+<div>
 
-      <h3 id="set-10347">10347 - <a target="_blank" href="https://www.lego.com/en-us/product/petite-sunny-bouquet-10347">Petite Sunny Bouquet</a> - 2025</h3>
-      <ul>
-        <li><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf">Instructions 1 / 2</a><br><a
-            href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575996.pdf">Instructions 2 / 2</a></li>
-        <li>
-          <h4>Individual Instructions</h4>
-          <ul>
-            <li>Book 1, page 9 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=9">Billy buttons</a> (small orange flowers, larger yellow flowers)</li>
-            <li>Book 1, page 12 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=12">Bluebell</a> (blue bells)</li>
-            <li>Book 1, page 16 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=16">Cleopatra fern</a> (big green leaves)</li>
-            <li>Book 1, page 20 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=20">Yellow yarrow</a> (yellow leaves)</li>
-            <li>Book 1, page 26 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=26">Daisy</a> (tiny yellow flowers, larger white flowers)</li>
-            <li>Book 1, page 31 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=31">Peony</a> (big white shells)</li>
-            <li>Book 2, page 25 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575996.pdf#page=25">Tulip</a> (big yellow shells)</li>
-            <li>Book 2, page 31 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575996.pdf#page=31">Gerbera daisy</a> (pink paddles)</li>
-          </ul>
-        </li>
-      </ul>
+  <h3 id="set-10347">10347 - <a target="_blank" href="https://www.lego.com/en-us/product/petite-sunny-bouquet-10347">Petite Sunny Bouquet</a></h3>
+  <p><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf">Instructions 1 / 2</a><br><a href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575996.pdf">Instructions 2 / 2</a></p>
+  <h4>Individual Instructions</h4>
+  <ul>
+    <li>Book 1, page 9 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=9">Billy buttons</a> (small orange flowers, larger yellow flowers)</li>
+    <li>Book 1, page 12 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=12">Bluebell</a> (blue bells)</li>
+    <li>Book 1, page 16 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=16">Cleopatra fern</a> (big green leaves)</li>
+    <li>Book 1, page 20 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=20">Yellow yarrow</a> (yellow leaves)</li>
+    <li>Book 1, page 26 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=26">Daisy</a> (tiny yellow flowers, larger white flowers)</li>
+    <li>Book 1, page 31 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575995.pdf#page=31">Peony</a> (big white shells)</li>
+    <li>Book 2, page 25 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575996.pdf#page=25">Tulip</a> (big yellow shells)</li>
+    <li>Book 2, page 31 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6575996.pdf#page=31">Gerbera daisy</a> (pink paddles)</li>
+  </ul>
+</li>
+</ul>
 
-    </div>
+</div>
 
-    <div>
+<div>
 
-      <h3 id="set-11508">11508 - <a target="_blank" href="https://www.lego.com/en-us/product/daisies-11508">Daisies</a> - 2026</h3>
-      <ul>
-        <li><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf">Instructions</a></li>
-        <li>
-          <h4>Individual Instructions</h4>
-          <ul>
-            <li>Page 5 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf#page=5">Small daisies</a> (small white flowers)</li>
-            <li>Page 8 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf#page=8">Large daisy without leaf</a> (white leaves)</li>
-            <li>Page 14 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf#page=14">Large daisy with left leaf</a> (white leaves, large green leaf)</li>
-            <li>Page 22 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf#page=22">Large daisy with right leaf</a> (white leaves, large green leaf)</li>
-            <li>Page 31 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf#page=31">Lavender</a> (purple flowers)</li>
-          </ul>
-        </li>
-      </ul>
+  <h3 id="set-11508">11508 - <a target="_blank" href="https://www.lego.com/en-us/product/daisies-11508">Daisies</a></h3>
+  <p><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf">Instructions</a></p>
+  <h4>Individual Instructions</h4>
+  <ul>
+    <li>Page 5 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf#page=5">Small daisies</a> (small white flowers)</li>
+    <li>Page 8 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf#page=8">Large daisy without leaf</a> (white leaves)</li>
+    <li>Page 14 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf#page=14">Large daisy with left leaf</a> (white leaves, large green leaf)</li>
+    <li>Page 22 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf#page=22">Large daisy with right leaf</a> (white leaves, large green leaf)</li>
+    <li>Page 31 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6618829.pdf#page=31">Lavender</a> (purple flowers)</li>
+  </ul>
+</li>
+</ul>
 
-    </div>
+</div>
 
-    <div>
+<div>
 
-      <h3 id="set-11514">11514 - <a target="_blank" href="https://www.lego.com/en-us/product/cosmos-flowers-11514">Cosmos Flowers</a> - 2026</h3>
-      <ul>
-        <li><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6650760.pdf">Instructions</a></li>
-        <li>
-          <h4>Individual Instructions</h4>
-          <ul>
-            <li>Page 5 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6650760.pdf#page=5">Dark pink cosmos flower</a> (dark pink petals)</li>
-            <li>Page 14 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6650760.pdf#page=14">Light pink cosmos flower</a> (light pink petals)</li>
-            <li>Page 19 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6650760.pdf#page=19">White cosmos flower</a> (white petals)</li>
-            <li>Page 30 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6650760.pdf#page=30">Fountain grass</a> (dark pink flowers, gold stems)</li>
-          </ul>
-        </li>
-      </ul>
+  <h3 id="set-11514">11514 - <a target="_blank" href="https://www.lego.com/en-us/product/cosmos-flowers-11514">Cosmos Flowers</a></h3>
+  <p><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6650760.pdf">Instructions</a></p>
+  <h4>Individual Instructions</h4>
+  <ul>
+    <li>Page 5 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6650760.pdf#page=5">Dark pink cosmos flower</a> (dark pink petals)</li>
+    <li>Page 14 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6650760.pdf#page=14">Light pink cosmos flower</a> (light pink petals)</li>
+    <li>Page 19 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6650760.pdf#page=19">White cosmos flower</a> (white petals)</li>
+    <li>Page 30 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6650760.pdf#page=30">Fountain grass</a> (dark pink flowers, gold stems)</li>
+  </ul>
+</li>
+</ul>
 
-    </div>
+</div>
 
-    <div>
+<div>
 
-      <h3 id="set-10280">10280 - <a target="_blank" href="https://www.lego.com/en-us/product/flower-bouquet-10280">Flower Bouquet</a> - 2021</h3>
-      <ul>
-        <li><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf">Instructions</a></li>
-        <li>
-          <h4>Individual Instructions</h4>
-          <ul>
-            <li>Page 15 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=15">Common daisy</a> (yellow discs)</li>
-            <li>Page 19 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=19">Rose</a> (pink car hoods)</li>
-            <li>Page 37 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=37">California poppy</a> (orange car hoods)</li>
-            <li>Page 43 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=43">Green bushes</a> (dark green bushes)</li>
-            <li>Page 48 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=48">Snapdragon</a> (dark pink flowers)</li>
-            <li>Page 64 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=64">Lavender</a> (gold egg shells)</li>
-            <li>Page 68 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=68">Green leaves</a> (long green panel)</li>
-            <li>Page 74 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=74">Aster</a> (purple leaves)</li>
-          </ul>
-        </li>
-      </ul>
+  <h3 id="set-10280">10280 - <a target="_blank" href="https://www.lego.com/en-us/product/flower-bouquet-10280">Flower Bouquet</a></h3>
+  <p><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf">Instructions</a></p>
+  <h4>Individual Instructions</h4>
+  <ul>
+    <li>Page 15 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=15">Common daisy</a> (yellow discs)</li>
+    <li>Page 19 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=19">Rose</a> (pink car hoods)</li>
+    <li>Page 37 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=37">California poppy</a> (orange car hoods)</li>
+    <li>Page 43 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=43">Green bushes</a> (dark green bushes)</li>
+    <li>Page 48 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=48">Snapdragon</a> (dark pink flowers)</li>
+    <li>Page 64 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=64">Lavender</a> (gold egg shells)</li>
+    <li>Page 68 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=68">Green leaves</a> (long green panel)</li>
+    <li>Page 74 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6532379.pdf#page=74">Aster</a> (purple leaves)</li>
+  </ul>
+</li>
+</ul>
 
-    </div>
+</div>
 
-    <div>
+<div>
 
-      <h3 id="set-10313">10313 - <a target="_blank" href="https://www.lego.com/en-us/product/wildflower-bouquet-10313">Wildflower Bouquet</a> - 2023</h3>
-      <ul>
-        <li><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf">Instructions</a></li>
-        <li>
-          <h4>Individual Instructions</h4>
-          <ul>
-            <li>Page 8 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=8">Leatherleaf fern</a> (large green leaves)</li>
-            <li>Page 12 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=12">Welsh poppy</a> (yellow shells)</li>
-            <li>Page 14 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=14">Cow parsley</a> (tiny white flowers)</li>
-            <li>Page 19 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=19">White cornflower</a> (white egg shells)</li>
-            <li>Page 23 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=23">Lavender</a> (purple leaves)</li>
-            <li>Page 25 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=25">Blue cornflower</a> (blue egg shells)</li>
-            <li>Page 32 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=32">Lupin</a> (pink and purple pirate hats)</li>
-            <li>Page 40 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=40">Larkspur</a> (blue leaves)</li>
-            <li>Page 48 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=48">Yellow gerbera daisy</a> (yellow paddles)</li>
-            <li>Page 51 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=51">Pink gerbera daisy</a> (pink paddles)</li>
-          </ul>
-        </li>
-      </ul>
+  <h3 id="set-10313">10313 - <a target="_blank" href="https://www.lego.com/en-us/product/wildflower-bouquet-10313">Wildflower Bouquet</a></h3>
+  <p><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf">Instructions</a></p>
+  <h4>Individual Instructions</h4>
+  <ul>
+    <li>Page 8 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=8">Leatherleaf fern</a> (large green leaves)</li>
+    <li>Page 12 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=12">Welsh poppy</a> (yellow shells)</li>
+    <li>Page 14 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=14">Cow parsley</a> (tiny white flowers)</li>
+    <li>Page 19 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=19">White cornflower</a> (white egg shells)</li>
+    <li>Page 23 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=23">Lavender</a> (purple leaves)</li>
+    <li>Page 25 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=25">Blue cornflower</a> (blue egg shells)</li>
+    <li>Page 32 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=32">Lupin</a> (pink and purple pirate hats)</li>
+    <li>Page 40 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=40">Larkspur</a> (blue leaves)</li>
+    <li>Page 48 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=48">Yellow gerbera daisy</a> (yellow paddles)</li>
+    <li>Page 51 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6508206.pdf#page=51">Pink gerbera daisy</a> (pink paddles)</li>
+  </ul>
+</li>
+</ul>
 
-    </div>
+</div>
 
-    <div>
+<div>
 
-      <h3 id="set-30701">30701 - <a target="_blank" href="https://www.lego.com/en-us/product/field-flowers-30701">Field Flowers</a> - 2025</h3>
-      <ul>
-        <li><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6547792.pdf">Instructions</a></li>
-        <li>
-          <h4>Individual Instructions</h4>
-          <ul>
-            <li>Page 1 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6547792.pdf#page=1">Dandelion flower</a> (yellow gears)</li>
-            <li>Page 2 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6547792.pdf#page=2">Wheat</a> (gold egg shells)</li>
-            <li>Page 2 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6547792.pdf#page=2">Dandelion clock</a> (tan spike)</li>
-          </ul>
-        </li>
-      </ul>
+  <h3 id="set-30701">30701 - <a target="_blank" href="https://www.lego.com/en-us/product/field-flowers-30701">Field Flowers</a></h3>
+  <p><a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6547792.pdf">Instructions</a></p>
+  <h4>Individual Instructions</h4>
+  <ul>
+    <li>Page 1 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6547792.pdf#page=1">Dandelion flower</a> (yellow gears)</li>
+    <li>Page 2 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6547792.pdf#page=2">Wheat</a> (gold egg shells)</li>
+    <li>Page 2 - <a target="_blank" href="https://www.lego.com/cdn/product-assets/product.bi.core.pdf/6547792.pdf#page=2">Dandelion clock</a> (tan spike)</li>
+  </ul>
+</li>
+</ul>
 
-    </div>
+</div>
 
-    <div>
+<div>
 
-      <p>Thank you for sharing today with us!</p>
+  <p>Thank you for sharing today with us!</p>
 
-    </div>
+</div>
 
-  </body>
+</body>
 </html>
